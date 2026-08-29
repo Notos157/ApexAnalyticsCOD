@@ -195,38 +195,144 @@
     <script src="js/common.js"></script>
     <script src="js/gemas.js"></script>
 
-    <!-- Elemento invisível necessário para o Google Tradutor rodar -->
-<div id="google_translate_element" style="display:none;"></div>
+    <!-- Botão flutuante com a imagem oficial do Google Tradutor -->
+<div id="apex-lang-wrapper">
+    <div id="apex-lang-btn" onclick="toggleLangMenu()" title="Mudar Idioma / Change Language">
+        <img src="https://www.gstatic.com/images/branding/product/1x/translate_48dp.png" alt="Translate" />
+    </div>
+    <div id="apex-lang-dropdown" class="notranslate" translate="no" style="display: none;">
+        <div onclick="changeLanguage('pt')">Brazil (Português)</div>
+        <div onclick="changeLanguage('en')">United States (English)</div>
+        <div onclick="changeLanguage('es')">Spain (Español)</div>
+        <div onclick="changeLanguage('tr')">Turkey (Türkçe)</div>
+        <div onclick="changeLanguage('zh-CN')">China (中文)</div>
+        <div onclick="changeLanguage('hi')">India (हिन्दी)</div>
+        <div onclick="changeLanguage('ar')">Saudi Arabia (العربية)</div>
+        <div onclick="changeLanguage('fr')">France (Français)</div>
+        <div onclick="changeLanguage('de')">Germany (Deutsch)</div>
+        <div onclick="changeLanguage('ru')">Russia (Русский)</div>
+        <div onclick="changeLanguage('ja')">Japan (日本語)</div>
+    </div>
+</div>
+
+<style>
+    /* Estilos do botão flutuante e do menu de escolha com rolagem */
+    #apex-lang-wrapper {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 99999;
+        font-family: inherit;
+    }
+    #apex-lang-btn {
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        transition: transform 0.2s, background 0.2s;
+        overflow: hidden;
+    }
+    #apex-lang-btn img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+    }
+    #apex-lang-btn:hover {
+        transform: scale(1.08);
+        background: #1e293b;
+        border-color: #64748b;
+    }
+    #apex-lang-dropdown {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        overflow-y: auto;
+        max-height: 280px;
+        width: 230px;
+    }
+    #apex-lang-dropdown div {
+        padding: 10px 15px;
+        color: #f8fafc;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        border-bottom: 1px solid #1e293b;
+    }
+    #apex-lang-dropdown div:last-child {
+        border-bottom: none;
+    }
+    #apex-lang-dropdown div:hover {
+        background: #1e293b;
+        color: #38bdf8;
+    }
+
+    /* Trava de segurança para sumir com qualquer iframe ou barra do Google */
+    iframe.goog-te-banner-frame, .skiptranslate, #goog-gt-tt {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    body {
+        top: 0px !important;
+        position: static !important;
+    }
+    .goog-text-highlight {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    #google_translate_element {
+        display: none !important;
+    }
+</style>
+
+<!-- Elemento invisível do Google Tradutor -->
+<div id="google_translate_element"></div>
 
 <script type="text/javascript">
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
-        pageLanguage: 'pt', // Idioma original em que o seu site foi escrito
+        pageLanguage: 'pt',
         autoDisplay: false
     }, 'google_translate_element');
 }
+
+// Abre ou fecha o menu suspenso de idiomas
+function toggleLangMenu() {
+    var menu = document.getElementById('apex-lang-dropdown');
+    menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+}
+
+// Executa a tradução ao clicar em uma das opções do menu
+function changeLanguage(langCode) {
+    var selectField = document.querySelector(".goog-te-combo");
+    if (selectField) {
+        selectField.value = langCode;
+        selectField.dispatchEvent(new Event('change'));
+        document.getElementById('apex-lang-dropdown').style.display = 'none';
+    } else {
+        alert("O tradutor ainda está carregando, aguarde um segundo e tente novamente.");
+    }
+}
+
+// Fecha o menu se o usuário clicar fora dele
+window.addEventListener('click', function(e) {
+    var wrapper = document.getElementById('apex-lang-wrapper');
+    if (!wrapper.contains(e.target)) {
+        document.getElementById('apex-lang-dropdown').style.display = 'none';
+    }
+});
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<script>
-// Script para forçar a tradução automática baseada na língua do navegador assim que carregar
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        var userLang = navigator.language || navigator.userLanguage;
-        var shortLang = userLang.split('-')[0]; // Ex: 'en-US' vira 'en'
-        
-        // Se o idioma do navegador não for português, tenta traduzir
-        if (shortLang !== 'pt') {
-            var selectField = document.querySelector(".goog-te-combo");
-            if (selectField) {
-                selectField.value = shortLang;
-                selectField.dispatchEvent(new Event('change'));
-            }
-        }
-    }, 1000); // Aguarda 1 segundo para garantir que o script do Google carregou por completo
-});
-</script>
 </body>
 
 </html>

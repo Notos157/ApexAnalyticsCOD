@@ -859,19 +859,3 @@ body {
         text-align: left !important;
     }
 }
-/* Esconde completamente a barra superior do Google Tradutor */
-.goog-te-banner-frame.skiptranslate {
-    display: none !important;
-}
-
-/* Impede que o Google empurre o site para baixo */
-body {
-    top: 0px !important;
-    position: static !important;
-}
-
-/* Remove os realces amarelos feios ao traduzir os textos */
-.goog-text-highlight {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
