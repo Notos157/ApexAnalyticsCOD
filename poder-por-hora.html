@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Estratégico - COD</title>
+            <link rel="icon" type="image/png" href="images/icone.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
+                        class="submenu-indicator">-</span></a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item " data-i18n="gems">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item " data-i18n="glorious">⛨ Retorno
+                            Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item active" data-i18n="power">⚡ Poder
+                            por Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item " data-i18n="heroes">⭐ Heróis</a></li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
+                            Flechas</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
+                <ul class="submenu-container" id="settings-submenu">
+                    <li><a href="idioma.html" class="menu-item menu-sub-item">🌐 Idioma Global</a></li>
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+        <section id="power-hour-tab" class="tab-content active">
+            <div class="panel-card"
+                style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; color: #f8fafc;">⚡
+                            CALCULADORA DE PODER POR HORA</h3>
+                        <p class="subtitle-card" style="margin-bottom: 0;">Compare duas opções de atividades para
+                            descobrir qual oferece melhor rendimento de poder por hora.</p>
+                    </div>
+                    <div
+                        style="background: #0b0f19; border: 1px solid #1f293d; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.2rem;">⚡</span>
+                        <div>
+                            <div
+                                style="font-size: 0.75rem; font-weight: 700; color: #a78bfa; text-transform: uppercase;">
+                                Como funciona?</div>
+                            <div style="font-size: 0.75rem; color: #94a3b8;">Informe o poder ganho e o tempo gasto para
+                                calcular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="poh-container">
+                    <!-- OPÇÃO A -->
+                    <div class="poh-card" style="border-color: rgba(168, 85, 247, 0.3);">
+                        <div
+                            style="display: flex; align-items: center; gap: 8px; color: #c084fc; font-weight: 700; font-size: 0.9rem; text-transform: uppercase;">
+                            <span
+                                style="width: 8px; height: 8px; background: #c084fc; border-radius: 50%; display: inline-block;"></span>
+                            OPÇÃO A
+                        </div>
+                        <div class="poh-input-group">
+                            <label class="poh-label">Poder ganho ao completar</label>
+                            <input type="text" id="poh-power-a" value="0" oninput="applyNumberMask(this)"
+                                class="poh-input">
+                        </div>
+                        <div class="poh-input-group">
+                            <label class="poh-label">Tempo gasto para completar</label>
+                            <div class="poh-input-row" style="gap: 8px; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-days-a" placeholder="0" oninput="applyNumberMask(this)"
+                                        class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">dias</small>
+                                </div>
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-hours-a" placeholder="0" oninput="applyNumberMask(this)"
+                                        class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">horas</small>
+                                </div>
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-minutes-a" placeholder="0"
+                                        oninput="applyNumberMask(this)" class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">minutos</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poh-result-box" style="border-color: rgba(168, 85, 247, 0.2);">
+                            <span class="poh-result-title"><span style="color: #c084fc;">⚡</span> PODER POR HORA</span>
+                            <div class="poh-result-val" id="poh-res-a" style="color: #c084fc;">0</div>
+                            <span class="poh-result-sub">poder/hora</span>
+                        </div>
+                    </div>
+
+                    <!-- OPÇÃO B -->
+                    <div class="poh-card" style="border-color: rgba(56, 189, 248, 0.3);">
+                        <div
+                            style="display: flex; align-items: center; gap: 8px; color: #38bdf8; font-weight: 700; font-size: 0.9rem; text-transform: uppercase;">
+                            <span
+                                style="width: 8px; height: 8px; background: #38bdf8; border-radius: 50%; display: inline-block;"></span>
+                            OPÇÃO B
+                        </div>
+                        <div class="poh-input-group">
+                            <label class="poh-label">Poder ganho ao completar</label>
+                            <input type="text" id="poh-power-b" value="0" oninput="applyNumberMask(this)"
+                                class="poh-input">
+                        </div>
+                        <div class="poh-input-group">
+                            <label class="poh-label">Tempo gasto para completar</label>
+                            <div class="poh-input-row" style="gap: 8px; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-days-b" placeholder="0" oninput="applyNumberMask(this)"
+                                        class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">dias</small>
+                                </div>
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-hours-b" placeholder="0" oninput="applyNumberMask(this)"
+                                        class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">horas</small>
+                                </div>
+                                <div style="flex: 1; min-width: 90px;">
+                                    <input type="text" id="poh-minutes-b" placeholder="0"
+                                        oninput="applyNumberMask(this)" class="poh-input">
+                                    <small
+                                        style="display:block; margin-top:5px; color:#94a3b8; text-align:center;">minutos</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poh-result-box" style="border-color: rgba(56, 189, 248, 0.2);">
+                            <span class="poh-result-title"><span style="color: #38bdf8;">⚡</span> PODER POR HORA</span>
+                            <div class="poh-result-val" id="poh-res-b" style="color: #38bdf8;">0</div>
+                            <span class="poh-result-sub">poder/hora</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTÕES DE AÇÃO E RESULTADO -->
+                <div class="poh-actions-grid">
+                    <button class="btn-poh-calc" onclick="calculatePowerHour()">📐 Calcular Poder por Hora</button>
+                    <button class="btn-clear-results" onclick="resetPowerHour()" style="margin-top: 0;">🗑️ Limpar e
+                        Resetar Tudo</button>
+                </div>
+
+                <!-- CARD DE COMPARAÇÃO / VENCEDOR -->
+                <div class="poh-main-result" id="poh-main-result-box" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div
+                            style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); padding: 12px; border-radius: 12px; font-size: 1.8rem;">
+                            🏆</div>
+                        <div>
+                            <div
+                                style="font-size: 0.75rem; font-weight: 700; color: #34d399; text-transform: uppercase;">
+                                Resultado</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #f8fafc;" id="poh-winner-title">
+                                Opção A é a melhor!</div>
+                            <div style="font-size: 0.85rem; color: #94a3b8;" id="poh-winner-desc">Ela gera mais poder
+                                por hora do que a Opção B.</div>
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: 8px; background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.2); padding: 12px 18px; border-radius: 12px;">
+                        <span style="color: #34d399; font-size: 1.2rem;">📈</span>
+                        <div>
+                            <div style="font-size: 1.1rem; font-weight: 900; color: #34d399;" id="poh-diff-percent">0%
+                            </div>
+                            <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">mais poder por
+                                hora</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DICA INFERIOR -->
+                <div
+                    style="background: #0b0f19; border: 1px solid #1f293d; padding: 12px; border-radius: 10px; margin-top: 15px; text-align: center; color: #94a3b8; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span>💡</span> <span>Dica: Sempre escolha atividades que ofereçam mais poder por hora para evoluir
+                        mais rápido!</span>
+                </div>
+            </div>
+        </section>
+    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
+            data-i18n="btn_donate">Apoie</span></a>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/poder-por-hora.js"></script>
+</body>
+
+</html>

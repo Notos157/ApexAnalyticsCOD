@@ -1,0 +1,861 @@
+/* Configurações Globais e Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Evita scroll horizontal indesejado */
+}
+
+/* Navbar / Cabeçalho (Home) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(31, 41, 61, 0.3);
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Seletor de Idiomas Global */
+.lang-select-global, #language-selector {
+    background-color: rgba(26, 34, 52, 0.6);
+    color: #ffffff;
+    border: 1px solid rgba(42, 55, 78, 0.5);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.btn-login {
+    background-color: transparent;
+    color: #a78bfa;
+    border: 1px solid #a78bfa;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #a78bfa;
+    color: #0b0f19;
+}
+
+/* Hero Section (Home) */
+.hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: rgba(167, 139, 250, 0.1);
+    color: #a78bfa;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.hero p {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Seção de Planos e Preços */
+.pricing-section {
+    padding: 40px 20px 80px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1100px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.pricing-card {
+    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(31, 41, 61, 0.4);
+    border-radius: 12px;
+    padding: 30px;
+    width: 320px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    border-color: #a78bfa;
+}
+
+.pricing-card.popular {
+    border-color: #a78bfa;
+    background-color: rgba(22, 30, 51, 0.55);
+}
+
+.pricing-card .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #8b5cf6;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+
+.pricing-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.price {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+}
+
+.currency-amount {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.period {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-left: 4px;
+}
+
+.pricing-card p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 25px;
+}
+
+.btn-primary {
+    background-color: #7c3aed;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    display: block;
+    margin-top: auto;
+}
+
+.btn-primary:hover {
+    background-color: #6d28d9;
+}
+
+/* =========================================
+   PÁGINA DE LOGIN
+   ========================================= */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: transparent;
+    position: relative;
+    width: 100%;
+}
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(31, 41, 61, 0.4);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #ffffff;
+}
+
+.login-subtitle {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.input-field-group label {
+    font-size: 0.9rem;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+.input-field-group input {
+    background-color: rgba(11, 15, 25, 0.4);
+    border: 1px solid rgba(42, 55, 78, 0.6);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+}
+
+.input-field-group input:focus {
+    border-color: #a78bfa;
+}
+
+.btn-submit {
+    background-color: #7c3aed;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background-color: #6d28d9;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    color: #a78bfa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #c4b5fd;
+    text-decoration: underline;
+}
+
+/* =========================================
+   ESTILOS DO PAINEL INTERNO (app.html)
+   ========================================= */
+.app-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    background-color: transparent;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(31, 41, 61, 0.35);
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-brand {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 15px;
+    color: #9ca3af;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+    background-color: rgba(167, 139, 250, 0.15);
+    color: #a78bfa;
+}
+
+.menu-item.logout {
+    margin-top: 20px;
+    color: #f87171;
+}
+
+.menu-item.logout:hover {
+    background-color: rgba(248, 113, 113, 0.1);
+    color: #ef4444;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    overflow-y: auto;
+    min-width: 0; /* Impede que elementos internos estourquem o grid/flex */
+    width: 100%;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(31, 41, 61, 0.35);
+    padding: 20px 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.topbar-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.topbar-clock {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.tab-pane {
+    display: none;
+    width: 100%;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.panel-card {
+    background-color: rgba(19, 27, 46, 0.42); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(31, 41, 61, 0.35);
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 100%;
+}
+
+.panel-card h3 {
+    font-size: 1.15rem;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+.form-group select, .form-group input {
+    background-color: rgba(11, 15, 25, 0.45);
+    border: 1px solid rgba(42, 55, 78, 0.6);
+    border-radius: 8px;
+    padding: 12px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-group select:focus, .form-group input:focus {
+    border-color: #a78bfa;
+}
+
+.buffs-container {
+    background-color: rgba(11, 15, 25, 0.35);
+    border: 1px solid rgba(31, 41, 61, 0.4);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.buffs-container h4 {
+    font-size: 0.95rem;
+    color: #a78bfa;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group input {
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.btn-calculate {
+    background-color: #7c3aed;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-calculate:hover {
+    background-color: #6d28d9;
+}
+
+.results-panel {
+    background-color: rgba(19, 27, 46, 0.42);
+}
+
+.results-content {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.placeholder-text {
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    backdrop-filter: blur(12px);
+    color: #6b7280;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(31, 41, 61, 0.35);
+    width: 100%;
+}
+
+.resources-base-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.subtitle-card {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+/* Responsividade Geral */
+@media (max-width: 992px) {
+    .pricing-grid, .dashboard-grid, .resources-base-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px 20px;
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(31, 41, 61, 0.35);
+    }
+
+    .sidebar-brand {
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-card {
+        padding: 15px;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+    }
+}
+
+.custom-lang-dropdown {
+    position: relative;
+    width: 170px;
+    max-width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    user-select: none;
+}
+
+.lang-selected {
+    background: rgba(30, 41, 59, 0.6);
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.lang-selected img {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.lang-selected .arrow {
+    margin-left: auto;
+    font-size: 10px;
+}
+
+.lang-options {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 65, 85, 0.6);
+    border-radius: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 999;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.lang-options.open {
+    display: block;
+}
+
+.lang-options li {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.lang-options li:hover {
+    background: rgba(51, 65, 85, 0.8);
+}
+
+.lang-options li img {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+/* Atualize ou adicione estas regras no seu css/style.css */
+
+body {
+    /* Fundo padrão com o gradiente de azul intenso/escuro para roxo escuro suave */
+    background: linear-gradient(135deg, #090919, #2b1055) !important;
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Garante que a página de login e a home herdem perfeitamente o fundo */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: transparent; /* Deixa o gradiente do body aparecer */
+    position: relative;
+    width: 100%;
+}
+.logo img.logo-img {
+    height: 35px; /* Ajuste este valor conforme o tamanho ideal para o seu cabeçalho */
+    width: auto;  /* Mantém a proporção original da imagem */
+    display: block;
+}
+.cod-logo-header {
+    display: block;
+    max-width: 220px; /* Ajuste o tamanho conforme preferir (ex: 180px a 250px) */
+    width: 100%;
+    height: auto;
+    margin: 0 auto 15px auto; /* Centraliza horizontalmente e dá um espaço abaixo */
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5)); /* Opcional: dá um destaque com sombra */
+}
+/* =========================================
+   CORREÇÃO DE RESPONSIVIDADE PARA CELULAR (Gemas & Tratados/Flechas)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* Ajustes gerais de espaçamento nos painéis */
+    .panel-card {
+        padding: 15px !important;
+    }
+
+    /* --- CALCULADORA DE GEMAS --- */
+    .gem-inputs-grid {
+        grid-template-columns: 1fr !important; /* Empilha todos os inputs */
+    }
+
+    .gem-results-top {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .gem-metrics-grid {
+        grid-template-columns: 1fr !important; /* Empilha as métricas secundárias */
+    }
+
+    .gem-summary-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* --- CALCULADORA DE TRATADOS E FLECHAS --- */
+    .tf-tech-dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tf-input-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .tf-input-row > div:last-child {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .tf-select-styled {
+        width: 100% !important;
+    }
+
+    .tf-res-grid {
+        grid-template-columns: 1fr !important; /* Empilha os resultados de Tratados e Flechas */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes finos para telas muito estreitas */
+    .gem-big-number {
+        font-size: 1.5rem !important;
+    }
+
+    .tf-ring-inner-content {
+        transform: scale(0.9);
+    }
+}
+/* =========================================
+   CORREÇÃO ESPECÍFICA PARA A TELA DE GEMAS NO CELULAR
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* Força os inputs de gemas a ficarem em coluna única */
+    .gem-inputs-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .gem-input-card {
+        width: 100% !important;
+    }
+
+    /* Empilha o topo de resultados (cards grandes e gráfico) */
+    .gem-results-top {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .gem-big-card {
+        width: 100% !important;
+    }
+
+    /* Empilha as métricas secundárias */
+    .gem-metrics-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .gem-metric-box {
+        width: 100% !important;
+    }
+
+    /* Ajusta o resumo financeiro inferior */
+    .gem-summary-row {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .gem-summary-col {
+        width: 100% !important;
+        text-align: left !important;
+    }
+}

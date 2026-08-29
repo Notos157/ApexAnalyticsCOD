@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Estratégico - COD</title>
+            <link rel="icon" type="image/png" href="images/icone.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
+                        class="submenu-indicator">-</span></a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item " data-i18n="gems">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item " data-i18n="glorious">⛨ Retorno
+                            Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item " data-i18n="power">⚡ Poder por
+                            Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item active" data-i18n="heroes">⭐ Heróis</a>
+                    </li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
+                            Flechas</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
+                <ul class="submenu-container" id="settings-submenu">
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+        <section id="gems-tab" class="tab-content active">
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div class="panel-card-container">
+                    <div class="panel-card"
+                        style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                        <h3 data-i18n="hero_calc_title"
+                            style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; color: #f8fafc;">
+                            CALCULADORA DE FICHAS DE HERÓIS</h3>
+                        <p data-i18n="hero_calc_sub" class="subtitle-card">Configure o nível atual e desejado clicando
+                            diretamente nas pílulas de nível de cada habilidade.</p>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label data-i18n="hero_rarity_label"
+                                style="color: #cbd5e1; font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Raridade
+                                do Herói:</label>
+                            <select id="hero-rarity" onchange="updateLiveHeroSummary()"
+                                style="background: #0b0f19; border: 1px solid #334155; color: #f8fafc; padding: 10px 14px; border-radius: 8px; width: 100%;">
+                                <option value="legendary" selected data-i18n="hero_opt_legendary">Lendário (690 Fichas
+                                    Totais)</option>
+                                <option value="epic" data-i18n="hero_opt_epic">Épico (440 Fichas Totais)</option>
+                            </select>
+                        </div>
+
+                        <div style="border-top: 1px solid #1f293d; padding-top: 15px;">
+                            <h4 data-i18n="hero_leveling_title"
+                                style="color: #38bdf8; font-size: 0.85rem; margin-bottom: 12px; text-transform: uppercase;">
+                                📏 Nivelamento por Habilidade</h4>
+
+                            <!-- Habilidade 1 a 4 -->
+                            <div class="skill-row-card">
+                                <div class="skill-row-header"><span class="skill-title-tag" data-i18n="skill_1_tag">✯
+                                        Habilidade 1</span></div>
+                                <div class="skill-selectors-grid">
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_current">Nível Atual</span>
+                                        <div class="pill-track" id="track-cur-1">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'cur', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'cur', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'cur', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'cur', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'cur', 5)">5</button>
+                                        </div>
+                                    </div>
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_target">Nível Alvo</span>
+                                        <div class="pill-track" id="track-target-1">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'target', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'target', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'target', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'target', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(1, 'target', 5)">5</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row-card">
+                                <div class="skill-row-header"><span class="skill-title-tag" data-i18n="skill_2_tag">✯
+                                        Habilidade 2</span></div>
+                                <div class="skill-selectors-grid">
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_current">Nível Atual</span>
+                                        <div class="pill-track" id="track-cur-2">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'cur', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'cur', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'cur', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'cur', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'cur', 5)">5</button>
+                                        </div>
+                                    </div>
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_target">Nível Alvo</span>
+                                        <div class="pill-track" id="track-target-2">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'target', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'target', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'target', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'target', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(2, 'target', 5)">5</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row-card">
+                                <div class="skill-row-header"><span class="skill-title-tag" data-i18n="skill_3_tag">✯
+                                        Habilidade 3</span></div>
+                                <div class="skill-selectors-grid">
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_current">Nível Atual</span>
+                                        <div class="pill-track" id="track-cur-3">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'cur', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'cur', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'cur', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'cur', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'cur', 5)">5</button>
+                                        </div>
+                                    </div>
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_target">Nível Alvo</span>
+                                        <div class="pill-track" id="track-target-3">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'target', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'target', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'target', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'target', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(3, 'target', 5)">5</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row-card">
+                                <div class="skill-row-header"><span class="skill-title-tag" data-i18n="skill_4_tag">✯
+                                        Habilidade 4</span></div>
+                                <div class="skill-selectors-grid">
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_current">Nível Atual</span>
+                                        <div class="pill-track" id="track-cur-4">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'cur', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'cur', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'cur', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'cur', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'cur', 5)">5</button>
+                                        </div>
+                                    </div>
+                                    <div class="skill-selector-group">
+                                        <span class="skill-selector-label" data-i18n="skill_target">Nível Alvo</span>
+                                        <div class="pill-track" id="track-target-4">
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'target', 1)">1</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'target', 2)">2</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'target', 3)">3</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'target', 4)">4</button>
+                                            <button type="button" class="pill-btn"
+                                                onclick="setSkillLevel(4, 'target', 5)">5</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-audit-tokens" onclick="runHeroAudit()" data-i18n="hero_btn_audit"> APURAR
+                            FICHAS 🔍 </button>
+                    </div>
+                </div>
+
+                <div class="panel-card"
+                    style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                    <h3 data-i18n="hero_report_title"
+                        style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; color: #f8fafc;">📐
+                        Relatório Contábil de Esculturas</h3>
+                    <p data-i18n="hero_report_sub" class="subtitle-card">Demonstrativo baseado na sequência global de
+                        melhorias de habilidades do Call of Dragons.</p>
+
+                    <div id="hero-report-container" style="display: none;">
+                        <div class="audit-main-result">
+                            <h4 data-i18n="hero_missing_title">Total de Fichas Faltantes (Sequencial)</h4>
+                            <div class="big-number" id="audit-total-missing">0 Fichas</div>
+                            <p id="audit-rarity-desc" data-i18n="hero_audit_desc">Custo apurado considerando o
+                                progression-tracking global.</p>
+                        </div>
+                        <button class="btn-clear-results" onclick="clearHeroAudit()" data-i18n="hero_btn_clear">🗑️
+                            LIMPAR RELATÓRIO</button>
+                    </div>
+
+                    <div id="hero-report-placeholder" data-i18n="hero_report_placeholder"
+                        style="text-align: center; color: #6b7280; font-style: italic; padding: 40px 20px;">
+                        Clique no botão "APURAR FICHAS NECESSÁRIAS" à esquerda para exibir o relatório contábil de
+                        esculturas.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
+            data-i18n="btn_donate">Apoie</span></a>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/herois.js"></script>
+</body>
+
+</html>

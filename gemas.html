@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Estratégico - COD</title>
+            <link rel="icon" type="image/png" href="images/icone.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
+                        class="submenu-indicator">-</span></a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item active" data-i18n="gems">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item " data-i18n="glorious">⛨ Retorno
+                            Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item " data-i18n="power">⚡ Poder por
+                            Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item " data-i18n="heroes">⭐ Heróis</a></li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
+                            Flechas</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
+                <ul class="submenu-container" id="settings-submenu">
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+        <section id="gems-tab" class="tab-content active">
+            <div class="panel-card"
+                style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; color: #f8fafc;">💎
+                    CALCULADORA DE PLANEJAMENTO DE GEMAS</h3>
+                <p class="subtitle-card">Insira seus dados financeiros atuais de gemas, ganhos e gastos diários para
+                    projetar sua evolução e atingir sua meta.</p>
+
+                <div class="gem-calc-wrapper">
+                    <!-- Seção de Inputs (Seus Dados) -->
+                    <div class="gem-inputs-grid">
+                        <div class="gem-input-card">
+                            <span class="gem-input-title">💎 Gemas Atuais</span>
+                            <input type="text" id="gem-current" value="0" oninput="applyNumberMask(this);"
+                                class="gem-input-field">
+                        </div>
+                        <div class="gem-input-card">
+                            <span class="gem-input-title" style="color: #34d399;">➕ Ganhos / Dia</span>
+                            <input type="text" id="gem-gain-day" value="0" oninput="applyNumberMask(this);"
+                                class="gem-input-field">
+                        </div>
+                        <div class="gem-input-card">
+                            <span class="gem-input-title" style="color: #f87171;">➖ Gastos / Dia</span>
+                            <input type="text" id="gem-spend-day" value="0" oninput="applyNumberMask(this);"
+                                class="gem-input-field">
+                        </div>
+                        <div class="gem-input-card">
+                            <span class="gem-input-title" style="color: #a78bfa;">🎯 Meta de Gemas</span>
+                            <input type="text" id="gem-target" value="0" oninput="applyNumberMask(this);"
+                                class="gem-input-field">
+                        </div>
+                        <div class="gem-input-card">
+                            <span class="gem-input-title" style="color: #38bdf8;">📅 Prazo (Dias)</span>
+                            <input type="text" id="gem-days" value="0" oninput="applyNumberMask(this);"
+                                class="gem-input-field">
+                        </div>
+                        <button class="btn-gem-calculate" onclick="calculateGemsPanel()">
+                            <span>📐 Processar Cálculo Estratégico</span>
+                        </button>
+                    </div>
+
+                    <!-- Seção de Resultados (Painel Dinâmico - Oculto inicialmente) -->
+                    <div id="gem-results-container" class="gem-results-dashboard" style="display: none;">
+                        <div
+                            style="font-size: 0.9rem; font-weight: 700; color: #a78bfa; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+                            <span>📈 Relatório Analítico</span>
+                        </div>
+
+                        <div class="gem-results-top">
+                            <!-- Card 1: Gemas Finais Previstas -->
+                            <div class="gem-big-card">
+                                <span class="gem-big-card-title">Gemas finais previstas</span>
+                                <div class="gem-big-number" id="res-final-gems">0 <span
+                                        style="font-size: 1.2rem;">💎</span></div>
+                            </div>
+
+                            <!-- Card 2: Faltam para a meta -->
+                            <div class="gem-big-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="gem-big-card-title" style="margin-bottom: 0;">Faltam para a meta</span>
+                                    <span id="res-percent-label"
+                                        style="font-size: 0.8rem; font-weight: 700; color: #c084fc;">0%</span>
+                                </div>
+                                <div class="gem-big-number" id="res-missing-gems"
+                                    style="font-size: 1.8rem; margin-top: 5px;">0 <span
+                                        style="font-size: 1rem;">💎</span></div>
+                                <div class="gem-progress-bar-container">
+                                    <div class="gem-progress-bar-fill" id="res-progress-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Gráfico Circular / Estilo Círculo de Porcentagem -->
+                            <div class="tf-circle-card" style="padding: 10px; margin: 0; box-shadow: none;">
+                                <div class="tf-progress-ring-container" style="width: 110px; height: 110px; margin: 0;">
+                                    <svg class="tf-progress-ring" viewBox="0 0 160 160"
+                                        style="width: 110px; height: 110px;">
+                                        <circle class="tf-progress-ring__circle-bg" cx="80" cy="80" r="70"></circle>
+                                        <circle class="tf-progress-ring__circle" id="gem-ring-progress" cx="80" cy="80"
+                                            r="70" style="stroke: #a78bfa;"></circle>
+                                    </svg>
+                                    <div class="tf-ring-inner-content">
+                                        <span class="tf-ring-percentage" id="gem-ring-percent"
+                                            style="font-size: 1.3rem;">0%</span>
+                                        <span class="tf-ring-label" style="font-size: 0.65rem;">da meta</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Métricas Secundárias -->
+                        <div class="gem-metrics-grid">
+                            <div class="gem-metric-box">
+                                <span class="gem-metric-label"><span>⬆️</span> Ganho líquido por dia</span>
+                                <div class="gem-metric-value" id="res-net-day">0 <span
+                                        style="color: #fbbf24; font-size: 0.9rem;">💎</span></div>
+                            </div>
+                            <div class="gem-metric-box">
+                                <span class="gem-metric-label"><span>📅</span> Dias necessários</span>
+                                <div class="gem-metric-value" id="res-days-needed">0 <span
+                                        style="font-size: 0.9rem;">📅</span></div>
+                            </div>
+                            <div class="gem-metric-box">
+                                <span class="gem-metric-label"><span>🎯</span> Meta estabelecida</span>
+                                <div class="gem-metric-value" id="res-target-display">0 <span
+                                        style="color: #fbbf24; font-size: 0.9rem;">💎</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Resumo Inferior Consolidado -->
+                        <div class="gem-summary-footer">
+                            <span
+                                style="font-size: 0.8rem; font-weight: 700; color: #a78bfa; text-transform: uppercase;">💡
+                                Resumo Financeiro Consolidado</span>
+                            <div class="gem-summary-row">
+                                <div class="gem-summary-col">
+                                    <span class="gem-summary-col-title">Gemas atuais</span>
+                                    <span class="gem-summary-col-val" id="sum-current">0 💎</span>
+                                </div>
+                                <div class="gem-summary-col">
+                                    <span class="gem-summary-col-title" id="sum-period-label">Ganho total (0
+                                        dias)</span>
+                                    <span class="gem-summary-col-val" id="sum-total-gain">0 💎</span>
+                                    <span class="gem-summary-col-sub" id="sum-gain-rate">(0/dia)</span>
+                                </div>
+                                <div class="gem-summary-col">
+                                    <span class="gem-summary-col-title" id="sum-spend-label">Gastos total (0
+                                        dias)</span>
+                                    <span class="gem-summary-col-val" id="sum-total-spend">0 💎</span>
+                                    <span class="gem-summary-col-sub" id="sum-spend-rate">(0/dia)</span>
+                                </div>
+                                <div class="gem-summary-col">
+                                    <span class="gem-summary-col-title">Saldo final</span>
+                                    <span class="gem-summary-col-val" id="sum-final-balance" style="color: #34d399;">0
+                                        💎</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão para apagar resultado e resetar tudo -->
+                        <button class="btn-clear-results" onclick="resetGemsPanel()">
+                            🗑️ Apagar Resultado e Resetar Tudo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
+            data-i18n="btn_donate">Apoie</span></a>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/gemas.js"></script>
+</body>
+
+</html>

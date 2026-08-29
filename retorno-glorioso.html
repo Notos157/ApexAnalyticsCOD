@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Estratégico - COD</title>
+            <link rel="icon" type="image/png" href="images/icone.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
+                        class="submenu-indicator">-</span></a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item " data-i18n="gems">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item active" data-i18n="glorious">⛨
+                            Retorno Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item " data-i18n="power">⚡ Poder por
+                            Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item " data-i18n="heroes">⭐ Heróis</a></li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
+                            Flechas</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
+                <ul class="submenu-container" id="settings-submenu">
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+        <section id="gems-tab" class="tab-content active">
+            <div class="glorious-hero-card">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 2rem;">⛨</span>
+                    <div>
+                        <h3 style="color: #f8fafc; font-size: 1.4rem; font-weight: 800; margin: 0;">RETORNO GLORIOSO
+                        </h3>
+                        <p class="subtitle-card" style="margin-bottom: 0;">Calculadora automática de custo em gemas para
+                            reviver tropas mortas durante a temporada.</p>
+                    </div>
+                </div>
+
+                <div class="glorious-input-container">
+                    <label class="glorious-input-label" for="glorious-troops-input">
+                        <span>⚔️ Quantidade de Tropas para Reviver</span>
+                    </label>
+                    <input type="text" id="glorious-troops-input" value="0" oninput="applyNumberMask(this)"
+                        class="glorious-input-field" placeholder="Ex: 25.000">
+                </div>
+
+                <div class="glorious-actions-grid">
+                    <button class="btn-glorious-calc" onclick="calculateGloriousReturn()">
+                        <span>📐 Calcular Custo em Gemas</span>
+                    </button>
+                    <button class="btn-glorious-clear" onclick="resetGloriousReturn()">
+                        <span>🗑️ Limpar</span>
+                    </button>
+                </div>
+
+                <!-- RESULTADOS (Oculto inicialmente, preenchido com zeros/vazio) -->
+                <div id="glorious-results-container" class="glorious-results-dashboard" style="display: none;">
+                    <div
+                        style="font-size: 0.85rem; font-weight: 700; color: #fbbf24; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+                        <span>📊 Relatório de Custos e Promoções</span>
+                    </div>
+
+                    <div class="glorious-metrics-grid">
+                        <div class="glorious-metric-box">
+                            <span class="glorious-metric-label"><span>💎</span> Total em Gemas</span>
+                            <div class="glorious-metric-value" id="glor-res-total-gems" style="color: #fbbf24;">0</div>
+                        </div>
+                        <div class="glorious-metric-box">
+                            <span class="glorious-metric-label"><span>🛡️</span> Promoção 1 (10.000🏹 / 300💎)</span>
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.2);">
+                                Limite: 20
+                            </div>
+                            <div class="glorious-metric-value" id="glor-res-promo1">0 <span
+                                    style="font-size: 0.8rem; color: #94a3b8; font-weight: normal;">tropas</span></div>
+                        </div>
+                        <div class="glorious-metric-box">
+                            <span class="glorious-metric-label"><span>⚡</span> Promoção 2 (10.000🏹 / 600💎)</span>
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.2);">
+                                Limite: 300
+                            </div>
+                            <div class="glorious-metric-value" id="glor-res-promo2">0 <span
+                                    style="font-size: 0.8rem; color: #94a3b8; font-weight: normal;">tropas</span></div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #34d399; font-size: 1.2rem;">💡</span>
+                            <span style="font-size: 0.85rem; color: #cbd5e1;" id="glor-res-breakdown">Cálculo efetuado
+                                com contagem automática de limites de promoção.</span>
+                        </div>
+                        <div
+                            style="font-size: 0.8rem; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.2);">
+                            Taxa base: 10.000 tropas por lote
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
+            data-i18n="btn_donate">Apoie< /span></a>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/retorno-glorioso.js"></script>
+</body>
+
+</html>

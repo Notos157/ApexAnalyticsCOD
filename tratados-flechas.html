@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Estratégico - COD</title>
+            <link rel="icon" type="image/png" href="images/icone.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
+                        class="submenu-indicator">-</span></a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item " data-i18n="gems">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item " data-i18n="glorious">⛨ Retorno
+                            Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item " data-i18n="power">⚡ Poder por
+                            Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item " data-i18n="heroes">⭐ Heróis</a></li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
+                            Flechas</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
+                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
+                <ul class="submenu-container" id="settings-submenu">
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+        <section id="gems-tab" class="tab-content active">
+            <div class="panel-card"
+                style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <h3 data-i18n="tf_panel_title"
+                    style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; color: #f8fafc;">📐
+                    CALCULADORA DE TRATADOS E FLECHAS</h3>
+                <p data-i18n="tf_panel_sub" class="subtitle-card">Selecione o nível atual e desejado para calcular os
+                    itens e o custo equivalente em gemas.</p>
+
+                <div class="tf-tech-dashboard">
+                    <!-- Coluna Esquerda: Seletores de Nível -->
+                    <div class="tf-inputs-container">
+                        <!-- Tratados -->
+                        <div class="tf-input-row">
+                            <div class="tf-input-info">
+                                <span class="tf-input-name" data-i18n="tf_treaties_name">📜 Tratados (Centro de
+                                    Rally)</span>
+                                <span class="tf-input-desc" data-i18n="tf_treaties_desc">Evolução de 1 até 25</span>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <div style="display: flex; flex-direction: column; gap: 3px;">
+                                    <label style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;"
+                                        data-i18n="tf_lbl_cur">Atual</label>
+                                    <select id="tf-treaty-cur" class="tf-select-styled"
+                                        onchange="calculateTreatiesArrows()">
+                                        <!-- Gerado dinamicamente via JS de 1 a 25 -->
+                                    </select>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 3px;">
+                                    <label style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;"
+                                        data-i18n="tf_lbl_target">Alvo</label>
+                                    <select id="tf-treaty-target" class="tf-select-styled"
+                                        onchange="calculateTreatiesArrows()">
+                                        <!-- Gerado dinamicamente via JS de 1 a 25 -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flechas -->
+                        <div class="tf-input-row">
+                            <div class="tf-input-info">
+                                <span class="tf-input-name" data-i18n="tf_arrows_name">🏹 Flechas (Torre de
+                                    Vigia)</span>
+                                <span class="tf-input-desc" data-i18n="tf_arrows_desc">Evolução de 1 até 25</span>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <div style="display: flex; flex-direction: column; gap: 3px;">
+                                    <label style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;"
+                                        data-i18n="tf_lbl_cur">Atual</label>
+                                    <select id="tf-arrow-cur" class="tf-select-styled"
+                                        onchange="calculateTreatiesArrows()">
+                                        <!-- Gerado dinamicamente via JS de 1 a 25 -->
+                                    </select>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 3px;">
+                                    <label style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;"
+                                        data-i18n="tf_lbl_target">Alvo</label>
+                                    <select id="tf-arrow-target" class="tf-select-styled"
+                                        onchange="calculateTreatiesArrows()">
+                                        <!-- Gerado dinamicamente via JS de 1 a 25 -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-clear-results" onclick="clearTreatiesArrows()" data-i18n="tf_btn_reset">🗑️
+                            RESETAR SELETORES</button>
+                    </div>
+
+                    <!-- Coluna Direita: Painel Tecnológico com Círculos de Porcentagem -->
+                    <div class="tf-circle-card">
+                        <div
+                            style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span
+                                style="font-size: 0.8rem; color: #a78bfa; font-weight: 700; text-transform: uppercase;"
+                                data-i18n="tf_tech_status"></span>
+                            <span
+                                style="font-size: 0.75rem; color: #34d399; background: rgba(52,211,153,0.1); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(52,211,153,0.2);"
+                                data-i18n="tf_rate_10gems">1 Item = 10 Gemas</span>
+                        </div>
+
+                        <!-- SVG Gradient Def -->
+                        <svg width="0" height="0">
+                            <defs>
+                                <linearGradient id="tf-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#38bdf8" />
+                                    <stop offset="100%" stop-color="#7c3aed" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        <!-- Círculo de Progresso -->
+                        <div class="tf-progress-ring-container">
+                            <svg class="tf-progress-ring" viewBox="0 0 160 160">
+                                <circle class="tf-progress-ring__circle-bg" cx="80" cy="80" r="70"></circle>
+                                <circle class="tf-progress-ring__circle" id="tf-ring-progress" cx="80" cy="80" r="70">
+                                </circle>
+                            </svg>
+                            <div class="tf-ring-inner-content">
+                                <span class="tf-ring-percentage" id="tf-total-percent">0%</span>
+                                <span class="tf-ring-label" data-i18n="tf_ring_complete">Concluído</span>
+                            </div>
+                        </div>
+
+                        <!-- Resultados Separados Tratados e Flechas -->
+                        <div class="tf-res-grid">
+                            <!-- Tratados Result -->
+                            <div class="tf-res-box treaties">
+                                <span class="tf-res-title" data-i18n="tf_res_treaties_title">Tratados Faltantes</span>
+                                <div class="tf-res-main-val" id="tf-treaty-missing">0 <span
+                                        style="font-size: 0.7rem; color: #94a3b8; font-weight: normal;">un</span></div>
+                                <div class="tf-res-gem-val" id="tf-treaty-gems">💎 0 Gemas</div>
+                            </div>
+                            <!-- Flechas Result -->
+                            <div class="tf-res-box arrows">
+                                <span class="tf-res-title" data-i18n="tf_res_arrows_title">Flechas Faltantes</span>
+                                <div class="tf-res-main-val" id="tf-arrow-missing">0 <span
+                                        style="font-size: 0.7rem; color: #94a3b8; font-weight: normal;">un</span></div>
+                                <div class="tf-res-gem-val" id="tf-arrow-gems">💎 0 Gemas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
+            data-i18n="btn_donate">Apoie</span></a>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/tratados-flechas.js"></script>
+</body>
+
+</html>
