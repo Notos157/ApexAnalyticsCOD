@@ -6,7 +6,7 @@ function calculateTroopsCustom() {
     const baseTimeSec = parseFloat(document.getElementById('base-time-seconds').value) || 0;
     const targetAmount = parseCleanNumber('troop-amount');
     const stoneBuff = parseFloat(document.getElementById('buff-stone-percent').value) || 0;
-    const kingdomBuff = document.getElementById('buff-kingdom').checked ? 15 : 0;
+    const kingdomBuff = document.getElementById('buff-kingdom').checked ? 10 : 0;
 
     const totalWood = baseWood * targetAmount;
     const totalOre = baseOre * targetAmount;
