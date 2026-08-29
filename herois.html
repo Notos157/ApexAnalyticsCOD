@@ -258,6 +258,38 @@
     <script src="js/auth.js"></script>
     <script src="js/common.js"></script>
     <script src="js/herois.js"></script>
+    <!-- Elemento invisível necessário para o Google Tradutor rodar -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'pt', // Idioma original em que o seu site foi escrito
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+// Script para forçar a tradução automática baseada na língua do navegador assim que carregar
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        var userLang = navigator.language || navigator.userLanguage;
+        var shortLang = userLang.split('-')[0]; // Ex: 'en-US' vira 'en'
+        
+        // Se o idioma do navegador não for português, tenta traduzir
+        if (shortLang !== 'pt') {
+            var selectField = document.querySelector(".goog-te-combo");
+            if (selectField) {
+                selectField.value = shortLang;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    }, 1000); // Aguarda 1 segundo para garantir que o script do Google carregou por completo
+});
+</script>
 </body>
 
 </html>
