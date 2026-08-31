@@ -7,6 +7,8 @@
 }
 
 body {
+    /* Fundo padrão com o gradiente de azul intenso/escuro para roxo escuro suave */
+    background: linear-gradient(135deg, #090919, #2b1055) !important;
     background-attachment: fixed;
     color: #ffffff;
     min-height: 100vh;
@@ -21,7 +23,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    background-color: rgba(18, 24, 36, 0.45);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(31, 41, 61, 0.3);
     width: 100%;
@@ -32,6 +34,21 @@ body {
     font-weight: bold;
     letter-spacing: 1px;
     color: #ffffff;
+}
+
+.logo img.logo-img {
+    height: 35px;
+    width: auto;
+    display: block;
+}
+
+.cod-logo-header {
+    display: block;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 15px auto;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
 .nav-right {
@@ -101,6 +118,14 @@ body {
     line-height: 1.5;
 }
 
+/* CORREÇÃO DO CORTE DA IMAGEM DO HERÓI */
+.hero-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
 /* Seção de Planos e Preços */
 .pricing-section {
     padding: 40px 20px 80px;
@@ -121,7 +146,7 @@ body {
 }
 
 .pricing-card {
-    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    background-color: rgba(19, 27, 46, 0.45);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(31, 41, 61, 0.4);
     border-radius: 12px;
@@ -215,7 +240,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: transparent;
+    background: transparent;
     position: relative;
     width: 100%;
 }
@@ -229,7 +254,7 @@ body {
 }
 
 .login-card {
-    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    background-color: rgba(19, 27, 46, 0.45);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(31, 41, 61, 0.4);
     border-radius: 12px;
@@ -327,7 +352,7 @@ body {
 }
 
 /* =========================================
-   ESTILOS DO PAINEL INTERNO (app.html)
+   ESTILOS DO PAINEL INTERNO & MENU LATERAL (MOBILE/DESKTOP)
    ========================================= */
 .app-layout {
     display: grid;
@@ -340,7 +365,7 @@ body {
 
 .sidebar {
     width: 280px;
-    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    background-color: rgba(18, 24, 36, 0.95);
     backdrop-filter: blur(12px);
     border-right: 1px solid rgba(31, 41, 61, 0.35);
     display: flex;
@@ -350,6 +375,8 @@ body {
     top: 0;
     height: 100vh;
     overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidebar-brand {
@@ -395,21 +422,82 @@ body {
     color: #ef4444;
 }
 
+/* Submenus na Sidebar */
+.has-submenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submenu-container {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-sub-item {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+/* Overlay Escuro para o Menu Mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Botão de Hambúrguer (Topbar) */
+.menu-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none; /* Escondido no Desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+}
+
+.menu-toggle-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     padding: 30px;
     overflow-y: auto;
-    min-width: 0; /* Impede que elementos internos estourquem o grid/flex */
+    min-width: 0;
     width: 100%;
 }
 
 .topbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    background-color: rgba(19, 27, 46, 0.45); /* Mais transparente */
+    gap: 20px;
+    background-color: rgba(19, 27, 46, 0.45);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(31, 41, 61, 0.35);
     padding: 20px 30px;
@@ -427,14 +515,15 @@ body {
 .topbar-clock {
     color: #9ca3af;
     font-size: 0.9rem;
+    margin-left: auto;
 }
 
-.tab-pane {
+.tab-pane, .tab-content {
     display: none;
     width: 100%;
 }
 
-.tab-pane.active {
+.tab-pane.active, .tab-content.active {
     display: block;
 }
 
@@ -446,7 +535,7 @@ body {
 }
 
 .panel-card {
-    background-color: rgba(19, 27, 46, 0.42); /* Mais transparente */
+    background-color: rgba(19, 27, 46, 0.42);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(31, 41, 61, 0.35);
     border-radius: 12px;
@@ -562,7 +651,7 @@ body {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: rgba(18, 24, 36, 0.45); /* Mais transparente */
+    background-color: rgba(18, 24, 36, 0.45);
     backdrop-filter: blur(12px);
     color: #6b7280;
     font-size: 0.9rem;
@@ -583,52 +672,9 @@ footer {
     margin-bottom: 15px;
 }
 
-/* Responsividade Geral */
-@media (max-width: 992px) {
-    .pricing-grid, .dashboard-grid, .resources-base-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .app-layout {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        padding: 15px 20px;
-        position: relative;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid rgba(31, 41, 61, 0.35);
-    }
-
-    .sidebar-brand {
-        margin-bottom: 20px;
-    }
-
-    .main-content {
-        padding: 15px;
-    }
-
-    .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 15px 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .panel-card {
-        padding: 15px;
-    }
-
-    .navbar {
-        padding: 15px 20px;
-    }
-}
-
+/* =========================================
+   DROPDOWN DE IDIOMAS CUSTOMIZADO
+   ========================================= */
 .custom-lang-dropdown {
     position: relative;
     width: 170px;
@@ -704,73 +750,114 @@ footer {
     object-fit: cover;
     border-radius: 2px;
 }
-/* Atualize ou adicione estas regras no seu css/style.css */
 
-body {
-    /* Fundo padrão com o gradiente de azul intenso/escuro para roxo escuro suave */
-    background: linear-gradient(135deg, #090919, #2b1055) !important;
-    background-attachment: fixed;
-    color: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-/* Garante que a página de login e a home herdem perfeitamente o fundo */
-.login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: transparent; /* Deixa o gradiente do body aparecer */
-    position: relative;
-    width: 100%;
-}
-.logo img.logo-img {
-    height: 35px; /* Ajuste este valor conforme o tamanho ideal para o seu cabeçalho */
-    width: auto;  /* Mantém a proporção original da imagem */
-    display: block;
-}
-.cod-logo-header {
-    display: block;
-    max-width: 220px; /* Ajuste o tamanho conforme preferir (ex: 180px a 250px) */
-    width: 100%;
-    height: auto;
-    margin: 0 auto 15px auto; /* Centraliza horizontalmente e dá um espaço abaixo */
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5)); /* Opcional: dá um destaque com sombra */
-}
 /* =========================================
-   CORREÇÃO DE RESPONSIVIDADE PARA CELULAR (Gemas & Tratados/Flechas)
+   RESPONSIVIDADE E MENU LATERAL RETRÁTIL (MOBILE)
    ========================================= */
+@media (max-width: 992px) {
+    .pricing-grid, .dashboard-grid, .resources-base-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-layout {
+        display: block;
+        position: relative;
+    }
 
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+        border-right: 1px solid rgba(31, 41, 61, 0.6);
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(280px);
+    }
+
+    .menu-toggle-btn {
+        display: flex;
+    }
+
+    .main-content {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .topbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-card {
+        padding: 15px;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+    }
+}
+
+/* =========================================
+   CORREÇÃO DE RESPONSIVIDADE PARA GEMAS & TRATADOS/FLECHAS
+   ========================================= */
 @media (max-width: 768px) {
-    /* Ajustes gerais de espaçamento nos painéis */
     .panel-card {
         padding: 15px !important;
     }
 
-    /* --- CALCULADORA DE GEMAS --- */
     .gem-inputs-grid {
-        grid-template-columns: 1fr !important; /* Empilha todos os inputs */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .gem-input-card {
+        width: 100% !important;
     }
 
     .gem-results-top {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .gem-big-card {
+        width: 100% !important;
     }
 
     .gem-metrics-grid {
-        grid-template-columns: 1fr !important; /* Empilha as métricas secundárias */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .gem-metric-box {
+        width: 100% !important;
     }
 
     .gem-summary-row {
-        flex-direction: column;
-        gap: 12px;
+        flex-direction: column !important;
+        gap: 15px !important;
     }
 
-    /* --- CALCULADORA DE TRATADOS E FLECHAS --- */
+    .gem-summary-col {
+        width: 100% !important;
+        text-align: left !important;
+    }
+
     .tf-tech-dashboard {
         display: flex;
         flex-direction: column;
@@ -793,12 +880,11 @@ body {
     }
 
     .tf-res-grid {
-        grid-template-columns: 1fr !important; /* Empilha os resultados de Tratados e Flechas */
+        grid-template-columns: 1fr !important;
     }
 }
 
 @media (max-width: 480px) {
-    /* Ajustes finos para telas muito estreitas */
     .gem-big-number {
         font-size: 1.5rem !important;
     }
@@ -807,55 +893,19 @@ body {
         transform: scale(0.9);
     }
 }
-/* =========================================
-   CORREÇÃO ESPECÍFICA PARA A TELA DE GEMAS NO CELULAR
-   ========================================= */
+/* Força o container da imagem do herói a ter um tamanho proporcional e estável */
+.hero-card-img-wrapper {
+    width: 100%;
+    height: 220px; /* Ajuste esta altura conforme o tamanho desejado no seu layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
-@media (max-width: 768px) {
-    /* Força os inputs de gemas a ficarem em coluna única */
-    .gem-inputs-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 15px !important;
-        width: 100% !important;
-    }
-
-    .gem-input-card {
-        width: 100% !important;
-    }
-
-    /* Empilha o topo de resultados (cards grandes e gráfico) */
-    .gem-results-top {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 15px !important;
-        width: 100% !important;
-    }
-
-    .gem-big-card {
-        width: 100% !important;
-    }
-
-    /* Empilha as métricas secundárias */
-    .gem-metrics-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        width: 100% !important;
-    }
-
-    .gem-metric-box {
-        width: 100% !important;
-    }
-
-    /* Ajusta o resumo financeiro inferior */
-    .gem-summary-row {
-        flex-direction: column !important;
-        gap: 15px !important;
-    }
-
-    .gem-summary-col {
-        width: 100% !important;
-        text-align: left !important;
-    }
+.hero-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
 }

@@ -11,7 +11,13 @@
 </head>
 
 <body class="app-layout theme-1">
+   <!-- Fundo escuro translúcido para o menu mobile -->
+   <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
    <aside class="sidebar">
+    <!-- Botão X discreto e elegante -->
+    <button class="sidebar-close-btn" id="sidebar-close" aria-label="Fechar Menu">&times;</button>
+
     <div class="sidebar-brand"><span data-i18n="brand_title">ToxicTeddy</span></div>
     <ul class="sidebar-menu">
         <!-- NOVO MENU: BANCO DE DADOS -->
@@ -55,6 +61,12 @@
 </aside>
     <main class="main-content">
         <header class="topbar">
+            <!-- Botão das 3 barrinhas deitadas (Hambúrguer) para o menu lateral no mobile -->
+            <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
         </header>
         <section id="gems-tab" class="tab-content active">
@@ -274,6 +286,65 @@
     <script src="js/auth.js"></script>
     <script src="js/common.js"></script>
     <script src="js/herois.js"></script>
+
+    <!-- Script de controle do Menu Lateral Mobile -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const sidebarClose = document.getElementById('sidebar-close');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('sidebar-open');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('active');
+            });
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', () => {
+                    sidebar.classList.remove('sidebar-open');
+                    overlay.classList.remove('active');
+                });
+            }
+        }
+    </script>
+
+    <!-- Estilo ajustado para o botão de fechar e overlay do menu mobile -->
+    <style>
+        .sidebar-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s, transform 0.2s;
+            display: none; /* Oculto por padrão no desktop */
+            z-index: 10;
+        }
+
+        .sidebar-close-btn:hover {
+            color: #f8fafc;
+            transform: scale(1.1);
+        }
+
+        /* Mostra o botão apenas quando o menu lateral estiver aberto no mobile */
+        @media (max-width: 1024px) {
+            .sidebar.sidebar-open .sidebar-close-btn {
+                display: block;
+            }
+        }
+    </style>
+
 <!-- Botão flutuante com a imagem oficial do Google Tradutor -->
 <div id="apex-lang-wrapper">
     <div id="apex-lang-btn" onclick="toggleLangMenu()" title="Mudar Idioma / Change Language">
