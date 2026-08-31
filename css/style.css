@@ -119,13 +119,23 @@ body {
 }
 
 /* CORREÇÃO DO CORTE DA IMAGEM DO HERÓI */
-.hero-card-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
+.hero-card-img-wrapper {
+            width: 100%;
+            height: 240px;
+            position: relative;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
+        .hero-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
 /* Seção de Planos e Preços */
 .pricing-section {
     padding: 40px 20px 80px;
@@ -893,19 +903,30 @@ footer {
         transform: scale(0.9);
     }
 }
-/* Força o container da imagem do herói a ter um tamanho proporcional e estável */
-.hero-card-img-wrapper {
-    width: 100%;
-    height: 220px; /* Ajuste esta altura conforme o tamanho desejado no seu layout */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
 
-.hero-card-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
+/* Garante que o card e a imagem mantenham proporções fixas e estáveis independentemente do menu */
+        .hero-card-db {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-card-img-wrapper {
+            width: 100% !important;
+            height: 240px !important;
+            min-height: 240px !important;
+            position: relative;
+            background: #1e293b;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+            flex-shrink: 0 !important;
+        }
+
+        .hero-card-img-wrapper img {
+            width: 100% !important;
+            height: 100% !important;
+            max-height: 240px !important;
+            object-fit: contain !important;
+            object-position: center !important;
+        }
