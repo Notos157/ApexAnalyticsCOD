@@ -3,20 +3,35 @@ function calculateTroopsCustom() {
     const baseOre = parseCleanNumber('base-ore');
     const baseMana = parseCleanNumber('base-mana');
     const baseGold = parseCleanNumber('base-gold');
-    const baseTimeSec = parseFloat(document.getElementById('base-time-seconds').value) || 0;
+    
+    let rawTimeInput = document.getElementById('base-time-seconds').value;
+    if (rawTimeInput.includes(':')) {
+        alert("Atenção: O campo 'Tempo base por 1 unidade' deve ser apenas em segundos (ex: 3.5), e não em formato de relógio (hh:mm:ss).");
+        return;
+    }
+    const baseTimeSec = parseFloat(rawTimeInput) || 0;
+
     const targetAmount = parseCleanNumber('troop-amount');
     const stoneBuff = parseFloat(document.getElementById('buff-stone-percent').value) || 0;
     const kingdomBuff = document.getElementById('buff-kingdom').checked ? 10 : 0;
+    const greatKingBuff = document.getElementById('buff-great-king').checked ? 10 : 0;
 
     const totalWood = baseWood * targetAmount;
     const totalOre = baseOre * targetAmount;
     const totalMana = baseMana * targetAmount;
     const totalGold = baseGold * targetAmount;
     const totalBaseSeconds = baseTimeSec * targetAmount;
-    const finalSeconds = totalBaseSeconds / (1 + ((stoneBuff + kingdomBuff) / 100));
-    const savedSeconds = totalBaseSeconds - finalSeconds; // Tempo economizado
+    
+    const totalBuffPercent = stoneBuff + kingdomBuff + greatKingBuff;
+    const finalSeconds = Math.round(totalBaseSeconds / (1 + (totalBuffPercent / 100)));
+    const savedSeconds = Math.max(0, totalBaseSeconds - finalSeconds);
 
-    // Sistema de tradução seguro com fallback para português
+    const formattedBaseTime = formatTime(totalBaseSeconds);
+    const formattedFinalTime = formatTime(finalSeconds);
+    
+    // Função local isolada para o tempo economizado ignorando qualquer conflito externo
+    const formattedSavedTime = formatTimeStrict(savedSeconds);
+
     const currentLang = localStorage.getItem('cod_lang') || 'pt';
     const t = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : {};
 
@@ -49,19 +64,17 @@ function calculateTroopsCustom() {
 
             <div class="result-group">
                 <h4 style="color: #a78bfa; margin-bottom: 5px; font-size: 0.95rem;">${lblFinalTime}</h4>
-                <p style="font-size: 1.5rem; font-weight: bold; color: #34d399; margin-bottom: 8px;">${formatTime(finalSeconds)}</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 8px;"><span>${lblTimeNoBuffs}</span> <span style="text-decoration: line-through;">${formatTime(totalBaseSeconds)}</span></p>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #34d399; margin-bottom: 4px;">${formattedFinalTime}</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 12px;"><span>${lblTimeNoBuffs}</span> <span style="text-decoration: line-through; color: #6b7280;">${formattedBaseTime}</span></p>
                 
-                <!-- Área de destaque do Tempo Economizado -->
-                <div style="background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3); padding: 10px 12px; border-radius: 8px; margin-top: 8px;">
-                    <span style="font-size: 0.85rem; color: #34d399; display: block; font-weight: bold;">⚡ Tempo Economizado com Buffs:</span>
-                    <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">${formatTime(savedSeconds)}</span>
+                <div style="background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3); padding: 10px 12px; border-radius: 8px;">
+                    <span style="font-size: 0.85rem; color: #34d399; display: block; font-weight: bold; margin-bottom: 2px;">⚡ Tempo Economizado com Buffs:</span>
+                    <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">${formattedSavedTime}</span>
                 </div>
             </div>
         </div>`;
 }
 
-// Função para limpar o formulário e resetar o painel de resultados
 function clearTroopsForm() {
     document.getElementById('base-wood').value = '';
     document.getElementById('base-ore').value = '';
@@ -71,6 +84,9 @@ function clearTroopsForm() {
     document.getElementById('troop-amount').value = '';
     document.getElementById('buff-stone-percent').selectedIndex = 0;
     document.getElementById('buff-kingdom').checked = false;
+    
+    const greatKingCheckbox = document.getElementById('buff-great-king');
+    if (greatKingCheckbox) greatKingCheckbox.checked = false;
 
     document.getElementById('troop-results').innerHTML = `
         <div id="result-placeholder-box" class="result-group" style="text-align: center; color: #6b7280; font-style: italic; padding: 40px 20px;" data-i18n="report_placeholder">
@@ -78,7 +94,6 @@ function clearTroopsForm() {
         </div>`;
 }
 
-// Funções Utilitárias Globais
 function parseCleanNumber(elementId) {
     const el = document.getElementById(elementId);
     if (!el || !el.value) return 0;
@@ -113,4 +128,21 @@ function formatTime(totalSeconds) {
     result += `${seconds}s`;
 
     return result.trim();
+}
+
+function formatTimeStrict(totalSeconds) {
+    if (isNaN(totalSeconds) || totalSeconds <= 0) return '0s';
+    
+    const days = Math.floor(totalSeconds / (3600 * 24));
+    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    let parts = [];
+    if (days > 0) parts.push(`${days}d`);
+    if (hours > 0) parts.push(`${hours}h`);
+    if (minutes > 0) parts.push(`${minutes}m`);
+    parts.push(`${seconds}s`);
+
+    return parts.join(' ');
 }

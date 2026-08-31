@@ -5,39 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Estratégico - COD</title>
-            <link rel="icon" type="image/png" href="images/icone.png"/>
+            <link rel="icon" type="image/png" href="images/logo.png"/>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calculators.css">
 </head>
 
 <body class="app-layout theme-1">
-    <aside class="sidebar">
-        <div class="sidebar-brand"><span data-i18n="brand_title">ApexAnalytics</span></div>
-        <ul class="sidebar-menu">
-            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
-                    data-i18n="menu_calculators"><span>📐 Calculadoras</span><span
-                        class="submenu-indicator">-</span></a>
-                <ul class="submenu-container open" id="calculators-submenu">
-                    <li><a href="gemas.html" class="menu-item menu-sub-item " data-i18n="gems">💎 Gemas</a></li>
-                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item " data-i18n="glorious">⛨ Retorno
-                            Glorioso</a></li>
-                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item active" data-i18n="power">⚡ Poder
-                            por Hora</a></li>
-                    <li><a href="tropas.html" class="menu-item menu-sub-item " data-i18n="troops">🏹 Tropas</a></li>
-                    <li><a href="herois.html" class="menu-item menu-sub-item " data-i18n="heroes">⭐ Heróis</a></li>
-                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item " data-i18n="tf">📜 Tratados e
-                            Flechas</a></li>
-                </ul>
-            </li>
-            <li><a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu"
-                    data-i18n="menu_settings"><span>⚙️ Configurações</span><span class="submenu-indicator">+</span></a>
-                <ul class="submenu-container" id="settings-submenu">
-                    <li><a href="idioma.html" class="menu-item menu-sub-item">🌐 Idioma Global</a></li>
-                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+<aside class="sidebar">
+    <div class="sidebar-brand"><span data-i18n="brand_title">ToxicTeddy</span></div>
+    <ul class="sidebar-menu">
+        <!-- NOVO MENU: BANCO DE DADOS -->
+        <li>
+            <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu" data-i18n="menu_database">
+                <span>📦 Banco de dados</span>
+                <span class="submenu-indicator">+</span>
+            </a>
+            <ul class="submenu-container open" id="database-submenu">
+                <li><a href="db-herois.html" class="menu-item menu-sub-item" data-i18n="db_heroes">⭐ Heróis</a></li>
+            </ul>
+        </li>
+
+        <!-- MENU CALCULADORAS -->
+        <li>
+            <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu" data-i18n="menu_calculators">
+                <span>📐 Calculadoras</span>
+                <span class="submenu-indicator">-</span>
+            </a>
+            <ul class="submenu-container open" id="calculators-submenu">
+                <li><a href="gemas.html" class="menu-item menu-sub-item" data-i18n="gems">💎 Gemas</a></li>
+                <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item" data-i18n="glorious">⛨ Retorno Glorioso</a></li>
+                <li><a href="poder-por-hora.html" class="menu-item menu-sub-item active" data-i18n="power">⚡ Poder por Hora</a></li>
+                <li><a href="tropas.html" class="menu-item menu-sub-item" data-i18n="troops">🏹 Tropas</a></li>
+                <li><a href="herois.html" class="menu-item menu-sub-item" data-i18n="heroes">⭐ Heróis</a></li>
+                <li><a href="tratados-flechas.html" class="menu-item menu-sub-item" data-i18n="tf">📜 Tratados e Flechas</a></li>
+            </ul>
+        </li>
+
+        <!-- MENU CONFIGURAÇÕES -->
+        <li>
+            <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu" data-i18n="menu_settings">
+                <span>⚙️ Configurações</span>
+                <span class="submenu-indicator">+</span>
+            </a>
+            <ul class="submenu-container open" id="settings-submenu">
+                <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
     <main class="main-content">
         <header class="topbar">
             <div class="topbar-title" data-i18n="topbar_title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
@@ -197,8 +212,9 @@
                 </div>
             </div>
         </section>
-    </main><a href="https://ko-fi.com/apexanalytics" target="_blank" class="floating-donation-btn"><span>💖</span> <span
-            data-i18n="btn_donate">Apoie</span></a>
+    </main><a href="https://ko-fi.com/toxicteddy" target="_blank" class="floating-donation-btn" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+    <img src="images/logo.png" alt="Apoie" style="width: 55px; height: 55px; object-fit: contain; border-radius: 50%; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+</a>
     <script src="js/translations.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/common.js"></script>

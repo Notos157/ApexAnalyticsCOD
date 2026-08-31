@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Dados - Heróis - ApexAnalytics</title>
+            <link rel="icon" type="image/png" href="images/logo.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <style>
+        /* Estilos do Banco de Dados de Heróis */
+        .db-hero-header {
+            margin-bottom: 20px;
+        }
+
+        .db-hero-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            background: #0b0f19;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+        }
+
+        .filter-buttons-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .db-hero-filter-btn {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .db-hero-filter-btn:hover,
+        .db-hero-filter-btn.active {
+            background: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+        }
+
+        /* Estilo da Barra de Pesquisa Moderna */
+        .db-search-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .db-search-input {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 9px 15px 9px 38px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .db-search-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+        }
+
+        .db-search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .db-hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .hero-card-db {
+            background: #0b0f19;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .hero-card-db:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-card-img-wrapper {
+            width: 100%;
+            height: 240px;
+            position: relative;
+            background: #1e293b;
+        }
+
+        .hero-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-rarity-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .rarity-legendary {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+            border: 1px solid #eab308;
+        }
+
+        .rarity-epic {
+            background: rgba(168, 85, 247, 0.2);
+            color: #c084fc;
+            border: 1px solid #c084fc;
+        }
+
+        .hero-card-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .hero-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+        /* Centralização e Design Tecnológico Vermelho */
+        .hero-card-tags {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            font-size: 0.7rem;
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.4), rgba(69, 10, 10, 0.6));
+            color: #fca5a5;
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.15);
+            text-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+        }
+
+        .artifact-tag-red {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.4), rgba(69, 10, 10, 0.6));
+            color: #fca5a5;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.15);
+            text-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+            margin-top: 2px;
+        }
+
+        /* ESTILOS DO MODAL DE DETALHES DO HERÓI */
+        .hero-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-modal-content {
+            background: #0b0f19;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 850px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-modal-overlay.open .hero-modal-content {
+            transform: translateY(0);
+        }
+
+        .hero-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            border: none;
+            color: #f8fafc;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .hero-modal-close:hover {
+            background: #ef4444;
+        }
+
+        .hero-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 20px;
+        }
+
+        .hero-modal-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #38bdf8;
+            flex-shrink: 0;
+        }
+
+        .hero-modal-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-modal-title-area h2 {
+            color: #f8fafc;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .hero-modal-section {
+            margin-bottom: 25px;
+        }
+
+        .hero-modal-section h4 {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .talent-description {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .talent-tree-container {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .hero-talent-img-wrapper {
+            background: #0b0f19;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            max-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-talent-img-wrapper img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transition: filter 0.2s;
+        }
+
+        .hero-talent-img-wrapper img:hover {
+            filter: brightness(1.1);
+        }
+
+        .talent-path-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .path-tag {
+            background: #1e293b;
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            font-weight: 600;
+        }
+
+        .path-tag.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border-color: #38bdf8;
+        }
+
+        .hero-pairs-grid,
+        .hero-artifacts-grid,
+        .hero-pets-grid {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-pair-card,
+        .hero-artifact-card,
+        .hero-pet-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1 1 calc(50% - 10px);
+            min-width: 240px;
+        }
+
+        .hero-pair-img,
+        .hero-artifact-img,
+        .hero-pet-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #1e293b;
+            flex-shrink: 0;
+        }
+
+        .hero-pair-img img,
+        .hero-artifact-img img,
+        .hero-pet-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-pair-info span,
+        .hero-artifact-info span,
+        .hero-pet-info span {
+            display: block;
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .hero-pair-info small,
+        .hero-artifact-info small,
+        .hero-pet-info small {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        /* ESTILOS DO MODAL DE ARTEFATO */
+        .artifact-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 9999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .artifact-modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .artifact-modal-content {
+            background: #0b0f19;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .artifact-modal-overlay.open .artifact-modal-content {
+            transform: translateY(0);
+        }
+
+        .artifact-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            border: none;
+            color: #f8fafc;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .artifact-modal-close:hover {
+            background: #ef4444;
+        }
+
+        .hero-artifact-card {
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .hero-artifact-card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+        }
+
+        .artifact-detail-body {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .artifact-detail-body p {
+            margin-bottom: 12px;
+        }
+
+        .artifact-detail-body hr {
+            border: 0;
+            border-top: 1px solid #1e293b;
+            margin: 15px 0;
+        }
+
+        /* ESTILOS DO LIGHTBOX DE IMAGEM */
+        .image-lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 9999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-lightbox-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .image-lightbox-overlay img {
+            max-width: 95%;
+            max-height: 95vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .image-lightbox-overlay.open img {
+            transform: scale(1);
+        }
+
+        .image-lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: #1e293b;
+            border: none;
+            color: #f8fafc;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 10000000;
+        }
+
+        .image-lightbox-close:hover {
+            background: #ef4444;
+            transform: scale(1.1);
+        }
+
+        @media(max-width: 600px) {
+            .hero-pair-card,
+            .hero-artifact-card,
+            .hero-pet-card {
+                width: 100%;
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="app-layout theme-1">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><span data-i18n="brand_title">ToxicTeddy</span></div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu open" data-i18n="menu_database">
+                    <span>📦 Banco de dados</span>
+                    <span class="submenu-indicator">-</span>
+                </a>
+                <ul class="submenu-container open" id="database-submenu">
+                    <li><a href="db-herois.html" class="menu-item menu-sub-item active" data-i18n="db_heroes">⭐ Heróis</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu" data-i18n="menu_calculators">
+                    <span>📐 Calculadoras</span>
+                    <span class="submenu-indicator">+</span>
+                </a>
+                <ul class="submenu-container open" id="calculators-submenu">
+                    <li><a href="gemas.html" class="menu-item menu-sub-item">💎 Gemas</a></li>
+                    <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item">⛨ Retorno Glorioso</a></li>
+                    <li><a href="poder-por-hora.html" class="menu-item menu-sub-item">⚡ Poder por Hora</a></li>
+                    <li><a href="tropas.html" class="menu-item menu-sub-item">🏹 Tropas</a></li>
+                    <li><a href="herois.html" class="menu-item menu-sub-item">⭐ Heróis</a></li>
+                    <li><a href="tratados-flechas.html" class="menu-item menu-sub-item">📜 Tratados e Flechas</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)" class="menu-item has-submenu" data-i18n="menu_settings">
+                    <span>⚙️ Configurações</span>
+                    <span class="submenu-indicator">+</span>
+                </a>
+                <ul class="submenu-container open" id="settings-submenu">
+                    <li><a href="temas.html" class="menu-item menu-sub-item">🎨 Temas de Cores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title">CALL OF DRAGONS: PAINEL ESTRATÉGICO</div>
+        </header>
+
+        <section class="tab-content active">
+            <div class="panel-card" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px;">
+                <div class="db-hero-header">
+                    <h3 style="color: #f8fafc; margin-bottom: 5px;">📦 BANCO DE DADOS DE HERÓIS</h3>
+                    <p class="subtitle-card">Consulte a lista completa de heróis, raridades, especialidades e talentos. Clique em um herói para ver os detalhes.</p>
+                </div>
+
+                <!-- Filtros Responsivos + Barra de Pesquisa por Nome -->
+                <div class="db-hero-filters">
+                    <div class="filter-buttons-group">
+                        <button class="db-hero-filter-btn active" onclick="filterHeroes('all')">Todos</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('legendary')">Lendários</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('epic')">Épicos</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('infantry')">Infantaria</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('cavalry')">Cavalaria</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('marksman')">Atiradores</button>
+                        <button class="db-hero-filter-btn" onclick="filterHeroes('magic')">Magia</button>
+                    </div>
+                    <div class="db-search-wrapper">
+                        <span class="db-search-icon">🔍</span>
+                        <input type="text" id="heroSearchInput" class="db-search-input" placeholder="Pesquisar comandante..." oninput="filterHeroes()">
+                    </div>
+                </div>
+
+                <!-- Grid de Cards de Heróis -->
+                <div class="db-hero-grid" id="db-hero-grid">
+                    <!-- Liliya -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="liliya" onclick="openHeroModal('liliya')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Liliya.png" alt="Liliya" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Liliya</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Magia</span>
+                                <span class="hero-tag">PvE</span>
+                                <span class="hero-tag">Habilidade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Velyn -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="velyn" onclick="openHeroModal('velyn')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Velyn.png" alt="Velyn" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Velyn</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Magia</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Controle</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bertrand -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="bertrand" onclick="openHeroModal('bertrand')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Bertrand.png" alt="Bertrand" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Bertrand</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Magia</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Habilidade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alwyn -->
+                    <div class="hero-card-db" data-rarity="epic" data-type="magic" data-name="alwyn" onclick="openHeroModal('alwyn')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Alwyn.png" alt="Alwyn" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-epic">Épico</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Alwyn</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Magia</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Controle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE DETALHES DO HERÓI -->
+    <div class="hero-modal-overlay" id="heroModalOverlay" onclick="closeHeroModalOutside(event)">
+        <div class="hero-modal-content" id="heroModalContent">
+            <button class="hero-modal-close" onclick="closeHeroModal()">✕</button>
+            <div id="heroModalBody">
+                <!-- Conteúdo gerado via script -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE DETALHES DO ARTEFATO -->
+    <div class="artifact-modal-overlay" id="artifactModalOverlay" onclick="closeArtifactModalOutside(event)">
+        <div class="artifact-modal-content" id="artifactModalContent">
+            <button class="artifact-modal-close" onclick="closeArtifactModal()">✕</button>
+            <div id="artifactModalBody">
+                <!-- Conteúdo gerado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE VISUALIZAÇÃO DE IMAGEM DA ÁRVORE (LIGHTBOX) -->
+    <div id="imageLightboxModal" class="image-lightbox-overlay" onclick="closeImageLightbox(event)">
+        <span class="image-lightbox-close" onclick="closeImageLightboxDirect()">✕</span>
+        <img id="imageLightboxImg" src="" alt="Árvore de Talentos Ampliada">
+    </div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // BANCO DE DADOS DE CONFIGURAÇÃO DOS HERÓIS
+        const heroesData = {
+            liliya: {
+                name: "Liliya",
+                image: "images/Liliya.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/LiliyaTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Dano de Habilidade"],
+                pairs: [
+                    { name: "Velyn", image: "images/Velyn.png", role: "" },
+                ],
+                // Adicionado: Configuração do Mascote para este herói
+                petName: "Sapphire Faedrake", 
+                petImage: "images/SapphireFaedrake.png",
+                artifacts: [
+                    {
+                        name: "Chama Infernal",
+                        image: "images/infernal_flame_full.png",
+                        role: `<span class="artifact-tag-red">Dano de ATQ Mágico</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Ao ser conjurada, sua Legião causa dano adicional sempre que realiza um ataque normal.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">1100</span></p>
+                            <p><strong style="color: #f8fafc;">Duração do Efeito:</strong> 3 s Passiva: Sua Legião ganha Aguçado Mágico quando o portador inflige Queimadura nos inimigos. Aguçado Mágico: ATQ + 15% por 5 s. Este efeito pode ser ativado uma vez a cada 10 s.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano Adicional da Habilidade Mágica:</strong> 1100 / 1350 / 1600 / 1900 / 2200</p>
+                            <p><strong style="color: #f8fafc;">Bônus de ATQ Mágico:</strong> 15% / 18% / 21% / 25% / 30%</p>
+                        `
+                    },
+                    {
+                        name: "Olho de Fênix",
+                        image: "images/phoenix_eye.png",
+                        role: `<span class="artifact-tag-red">Dano de Hábilidade</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Causa dano a até <strong style="color: #fbbf24;">4</strong> Legiões inimigas em um círculo designado.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">2000</span></p>
+                            <p><strong style="color: #f8fafc;">Redução de Dano:</strong> Legiões recebem <span style="color: #fbbf24;">15%</span> menos dano por alvo adicional.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 2000 / 2500 / 3000 / 3500 / 4000</p>
+                            <p><strong style="color: #f8fafc;">Alvos máximos:</strong> 4 / 4 / 4 / 4 / 5</p>
+                        `
+                    }
+                ]
+            },
+            velyn: {
+                name: "Velyn",
+                image: "images/Velyn.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/VelynTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Dano de ATQ Mágico"],
+                pairs: [
+                    { name: "Waldyr", image: "images/Waldyr.png", role: "" },
+                ],
+                petName: "Sapphire Faedrake",
+                petImage: "images/SapphireFaedrake.png",
+                artifacts: [
+                    {
+                        name: "Bomba Magica",
+                        image: "images/magic_bomb_full.png",
+                        role: `<span class="artifact-tag-red">Dano de Habilidade</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Lança uma Bomba Mágica na Legião selecionada. Após <strong style="color: #fbbf24;">8</strong> segundos, a bomba explode, causando dano a até <strong style="color: #fbbf24;">3</strong> Legiões inimigas próximas.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">900</span></p>
+                            <p><strong style="color: #f8fafc;">Redução de Dano:</strong> Legiões inimigas recebem <span style="color: #fbbf24;">15%</span> menos dano por alvo adicional.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 900 / 1100 / 1300 / 1500 / 1800</p>
+                        `
+                    },
+                    {
+                        name: "Olho de Fênix",
+                        image: "images/phoenix_eye.png",
+                        role: `<span class="artifact-tag-red">Dano de Hábilidade</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Causa dano a até <strong style="color: #fbbf24;">4</strong> Legiões inimigas em um círculo designado.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">2000</span></p>
+                            <p><strong style="color: #f8fafc;">Redução de Dano:</strong> Legiões recebem <span style="color: #fbbf24;">15%</span> menos dano por alvo adicional.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 2000 / 2500 / 3000 / 3500 / 4000</p>
+                            <p><strong style="color: #f8fafc;">Alvos máximos:</strong> 4 / 4 / 4 / 4 / 5</p>
+                        `
+                    }
+                ]
+            },
+            bertrand: {
+                name: "Bertrand",
+                image: "images/Bertrand.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/talent-bertrand.png",
+                talentDesc: "Build otimizada para sobrevivência em linha de frente e aplicação rápida de habilidades.",
+                talentTags: ["Ramo: Habilidade", "Ramo: Defesa"],
+                pairs: [
+                    { name: "Liliya", image: "images/Liliya.png", role: "Parceiro Ideal" }
+                ],
+                petName: "Guardião Rochoso",
+                petImage: "images/icone.png",
+                artifacts: [
+                    {
+                        name: "Lança de Cristal",
+                        image: "images/artifact-lanca.png",
+                        role: `<span class="artifact-tag-red">Aumento de Habilidade</span>`,
+                        description: "<p>Aumenta consideravelmente o poder de habilidade e perfuração de defesa.</p>"
+                    }
+                ]
+            },
+            alwyn: {
+                name: "Alwyn",
+                image: "images/Alwyn.png",
+                rarity: "Épico",
+                rarityClass: "rarity-epic",
+                talentImg: "images/talent-alwyn.png",
+                talentDesc: "Árvore focada em maximizar o tempo de recarga de habilidade para comandantes F2P.",
+                talentTags: ["Ramo: Controle", "Ramo: Regeneração"],
+                pairs: [
+                    { name: "Velyn", image: "images/Velyn.png", role: "Parceiro F2P Poderoso" }
+                ],
+                petName: "Fada Sombria",
+                petImage: "images/icone.png",
+                artifacts: [
+                    {
+                        name: "Orbe Ancestral",
+                        image: "images/artifact-orbe.png",
+                        role: `<span class="artifact-tag-red">Recuperação de Raiva</span>`,
+                        description: "<p>Foco total em acelerar ciclos de habilidade com regeneração passiva.</p>"
+                    }
+                ]
+            }
+        };
+
+        let currentCategory = 'all';
+
+        function filterHeroes(category = null) {
+            if (category !== null) {
+                currentCategory = category;
+                const btns = document.querySelectorAll('.db-hero-filter-btn');
+                btns.forEach(btn => btn.classList.remove('active'));
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                }
+            }
+
+            const searchTerm = document.getElementById('heroSearchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.hero-card-db');
+
+            cards.forEach(card => {
+                const rarity = card.getAttribute('data-rarity');
+                const type = card.getAttribute('data-type');
+                const name = card.getAttribute('data-name');
+
+                const matchesCategory = (currentCategory === 'all' || rarity === currentCategory || type === currentCategory);
+                const matchesSearch = (name.includes(searchTerm) || searchTerm === '');
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Funções do Modal com a nova seção de Mascote
+        function openHeroModal(heroKey) {
+            const hero = heroesData[heroKey];
+            if (!hero) return;
+
+            const modalBody = document.getElementById('heroModalBody');
+
+            let tagsHTML = hero.talentTags.map((tag, index) => `
+                <span class="path-tag ${index === 0 ? 'active' : ''}">${tag}</span>
+            `).join('');
+
+            let pairsHTML = hero.pairs.map(pair => `
+                <div class="hero-pair-card">
+                    <div class="hero-pair-img"><img src="${pair.image}" alt="${pair.name}" onerror="this.src='images/icone.png';"></div>
+                    <div class="hero-pair-info">
+                        <span>${pair.name}</span>
+                        <small>${pair.role}</small>
+                    </div>
+                </div>
+            `).join('');
+
+            // HTML gerado para o Mascote do Herói
+            let petHTML = `
+                <div class="hero-pet-card">
+                    <div class="hero-pet-img"><img src="${hero.petImage || 'images/icone.png'}" alt="${hero.petName || 'Mascote'}" onerror="this.src='images/icone.png';"></div>
+                    <div class="hero-pet-info">
+                        <span>${hero.petName || 'Nenhum'}</span>
+                        <small></small>
+                    </div>
+                </div>
+            `;
+
+            let artifactsHTML = hero.artifacts.map((art, index) => `
+                <div class="hero-artifact-card" onclick="openArtifactModal('${heroKey}', ${index})">
+                    <div class="hero-artifact-img"><img src="${art.image}" alt="${art.name}" onerror="this.src='images/icone.png';"></div>
+                    <div class="hero-artifact-info">
+                        <span>${art.name}</span>
+                        <small>${art.role}</small>
+                    </div>
+                </div>
+            `).join('');
+
+            modalBody.innerHTML = `
+                <div class="hero-modal-header">
+                    <div class="hero-modal-avatar">
+                        <img src="${hero.image}" alt="${hero.name}" onerror="this.src='images/icone.png';">
+                    </div>
+                    <div class="hero-modal-title-area">
+                        <h2>${hero.name}</h2>
+                        <span class="hero-rarity-badge ${hero.rarityClass}" style="position: relative; top: 0; right: 0; display: inline-block;">${hero.rarity}</span>
+                    </div>
+                </div>
+
+                <div class="hero-modal-section">
+                    <h4>⚙️ Árvore de Talentos (Build)</h4>
+                    <p class="talent-description">${hero.talentDesc}</p>
+                    <div class="talent-tree-container">
+                        <div class="hero-talent-img-wrapper">
+                            <img src="${hero.talentImg}" alt="Árvore de Talentos de ${hero.name}" onclick="openImageLightbox('${hero.talentImg}')" onerror="this.src='images/icone.png';" title="Clique para ampliar a imagem">
+                        </div>
+                        <div class="talent-path-tags">
+                            ${tagsHTML}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-modal-section">
+                    <h4>Melhores Duplas</h4>
+                    <div class="hero-pairs-grid">
+                        ${pairsHTML}
+                    </div>
+                </div>
+
+                <!-- NOVA SEÇÃO DE MASCOTE -->
+                <div class="hero-modal-section">
+                    <h4>Melhor Mascote</h4>
+                    <div class="hero-pets-grid">
+                        ${petHTML}
+                    </div>
+                </div>
+
+                <div class="hero-modal-section">
+                    <h4>Melhores Artefatos <span style="font-size: 0.75rem; color: #38bdf8; font-weight: normal; margin-left: 5px;">(Clique para ver detalhes)</span></h4>
+                    <div class="hero-artifacts-grid">
+                        ${artifactsHTML}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('heroModalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeHeroModal() {
+            document.getElementById('heroModalOverlay').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeHeroModalOutside(event) {
+            if (event.target.id === 'heroModalOverlay') {
+                closeHeroModal();
+            }
+        }
+
+        function openArtifactModal(heroKey, artifactIndex) {
+            const hero = heroesData[heroKey];
+            if (!hero || !hero.artifacts[artifactIndex]) return;
+
+            const art = hero.artifacts[artifactIndex];
+            const modalBody = document.getElementById('artifactModalBody');
+
+            modalBody.innerHTML = `
+                <div class="hero-modal-header" style="margin-bottom: 15px; padding-bottom: 15px;">
+                    <div class="hero-modal-avatar" style="width: 60px; height: 60px;">
+                        <img src="${art.image}" alt="${art.name}" onerror="this.src='images/icone.png';">
+                    </div>
+                    <div class="hero-modal-title-area">
+                        <h2 style="font-size: 1.4rem; margin-bottom: 2px;">${art.name}</h2>
+                        <small style="color: #94a3b8;">${art.role}</small>
+                    </div>
+                </div>
+                <div class="artifact-detail-body">
+                    ${art.description}
+                </div>
+            `;
+
+            document.getElementById('artifactModalOverlay').classList.add('open');
+        }
+
+        function closeArtifactModal() {
+            document.getElementById('artifactModalOverlay').classList.remove('open');
+        }
+
+        function closeArtifactModalOutside(event) {
+            if (event.target.id === 'artifactModalOverlay') {
+                closeArtifactModal();
+            }
+        }
+
+        function openImageLightbox(imgSrc) {
+            const modal = document.getElementById('imageLightboxModal');
+            const modalImg = document.getElementById('imageLightboxImg');
+            modalImg.src = imgSrc;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageLightbox(event) {
+            if (event.target.id === 'imageLightboxModal' || event.target.classList.contains('image-lightbox-overlay')) {
+                document.getElementById('imageLightboxModal').classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function closeImageLightboxDirect() {
+            document.getElementById('imageLightboxModal').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
+    <!-- Botão flutuante com a imagem oficial do Google Tradutor -->
+    <div id="apex-lang-wrapper">
+        <div id="apex-lang-btn" onclick="toggleLangMenu()" title="Mudar Idioma / Change Language">
+            <img src="https://www.gstatic.com/images/branding/product/1x/translate_48dp.png" alt="Translate" />
+        </div>
+        <div id="apex-lang-dropdown" class="notranslate" translate="no" style="display: none;">
+            <div onclick="changeLanguage('pt')">Brazil (Português)</div>
+            <div onclick="changeLanguage('en')">United States (English)</div>
+            <div onclick="changeLanguage('es')">Spain (Español)</div>
+            <div onclick="changeLanguage('tr')">Turkey (Türkçe)</div>
+            <div onclick="changeLanguage('zh-CN')">China (中文)</div>
+            <div onclick="changeLanguage('hi')">India (हिन्दी)</div>
+            <div onclick="changeLanguage('ar')">Saudi Arabia (العربية)</div>
+            <div onclick="changeLanguage('fr')">France (Français)</div>
+            <div onclick="changeLanguage('de')">Germany (Deutsch)</div>
+            <div onclick="changeLanguage('ru')">Russia (Русский)</div>
+            <div onclick="changeLanguage('ja')">Japan (日本語)</div>
+            <div onclick="changeLanguage('vi')">Vietnam (Tiếng Việt)</div>
+        </div>
+    </div>
+
+    <style>
+        #apex-lang-wrapper {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+            font-family: inherit;
+        }
+
+        #apex-lang-btn {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s, background 0.2s;
+            overflow: hidden;
+        }
+
+        #apex-lang-btn img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+
+        #apex-lang-btn:hover {
+            transform: scale(1.08);
+            background: #1e293b;
+            border-color: #64748b;
+        }
+
+        #apex-lang-dropdown {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            max-height: 280px;
+            width: 230px;
+        }
+
+        #apex-lang-dropdown div {
+            padding: 10px 15px;
+            color: #f8fafc;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        #apex-lang-dropdown div:last-child {
+            border-bottom: none;
+        }
+
+        #apex-lang-dropdown div:hover {
+            background: #1e293b;
+            color: #38bdf8;
+        }
+
+        iframe.goog-te-banner-frame,
+        .skiptranslate,
+        #goog-gt-tt {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        body {
+            top: 0px !important;
+            position: static !important;
+        }
+
+        .goog-text-highlight {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+    </style>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'pt',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function toggleLangMenu() {
+            var menu = document.getElementById('apex-lang-dropdown');
+            menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+        }
+
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+                document.getElementById('apex-lang-dropdown').style.display = 'none';
+            } else {
+                alert("O tradutor ainda está carregando, aguarde um segundo e tente novamente.");
+            }
+        }
+
+        window.addEventListener('click', function (e) {
+            var wrapper = document.getElementById('apex-lang-wrapper');
+            if (!wrapper.contains(e.target)) {
+                document.getElementById('apex-lang-dropdown').style.display = 'none';
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <a href="https://ko-fi.com/toxicteddy" target="_blank" class="floating-donation-btn" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+    <img src="images/logo.png" alt="Apoie" style="width: 55px; height: 55px; object-fit: contain; border-radius: 50%; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+</a>
+</body>
+
+</html>
