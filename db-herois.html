@@ -709,14 +709,14 @@
                         </div>
                     </div>
 
-                    <!-- Alwyn -->
-                    <div class="hero-card-db" data-rarity="epic" data-type="magic" data-name="alwyn" onclick="openHeroModal('alwyn')">
+                    <!-- Thundelyn -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="Thundelyn" onclick="openHeroModal('Thundelyn')">
                         <div class="hero-card-img-wrapper">
-                            <img src="images/Alwyn.png" alt="Alwyn" onerror="this.src='images/icone.png';">
-                            <span class="hero-rarity-badge rarity-epic">Épico</span>
+                            <img src="images/Thundelyn.png" alt="Thundelyn" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
                         </div>
                         <div class="hero-card-info">
-                            <div class="hero-card-title">Alwyn</div>
+                            <div class="hero-card-title">Thundelyn</div>
                             <div class="hero-card-tags">
                                 <span class="hero-tag">Magia</span>
                                 <span class="hero-tag">PvP</span>
@@ -770,7 +770,7 @@
                 talentDesc: "",
                 talentTags: ["Ramo: Dano de Habilidade"],
                 pairs: [
-                    { name: "Velyn", image: "images/Velyn.png", role: "" },
+                    { name: "Velyn", image: "images/Velyn.png", role:`<span class="artifact-tag-red">Melhor Dupla</span>` },
                 ],
                 // Adicionado: Configuração do Mascote para este herói
                 petName: "Sapphire Faedrake", 
@@ -819,7 +819,7 @@
                 talentDesc: "",
                 talentTags: ["Ramo: Dano de ATQ Mágico"],
                 pairs: [
-                    { name: "Waldyr", image: "images/Waldyr.png", role: "" },
+                    { name: "Waldyr", image: "images/Waldyr.png", role:`<span class="artifact-tag-red"> Melhor dupla F2P</span>`},
                 ],
                 petName: "Sapphire Faedrake",
                 petImage: "images/SapphireFaedrake.png",
@@ -862,42 +862,93 @@
                 image: "images/Bertrand.png",
                 rarity: "Lendário",
                 rarityClass: "rarity-legendary",
-                talentImg: "images/talent-bertrand.png",
+                talentImg: "images/BertrandTalentos.png",
                 talentDesc: "Build otimizada para sobrevivência em linha de frente e aplicação rápida de habilidades.",
-                talentTags: ["Ramo: Habilidade", "Ramo: Defesa"],
+                talentTags: ["Ramo: Habilidade"],
                 pairs: [
-                    { name: "Liliya", image: "images/Liliya.png", role: "Parceiro Ideal" }
+                    { name: "Liliya", image: "images/Tohar.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>`},
+                    { name: "Liliya", image: "images/Theia.png", role: `<span class="artifact-tag-red">Voador</span>`}
                 ],
-                petName: "Guardião Rochoso",
-                petImage: "images/icone.png",
+                petName: "Sombra Faedrake",
+                petImage: "images/SombraFaedrake.png",
                 artifacts: [
-                    {
-                        name: "Lança de Cristal",
-                        image: "images/artifact-lanca.png",
-                        role: `<span class="artifact-tag-red">Aumento de Habilidade</span>`,
-                        description: "<p>Aumenta consideravelmente o poder de habilidade e perfuração de defesa.</p>"
+{
+                        name: "Orbe da Miragem",
+                        image: "images/mirage_orb.png",
+                        role: `<span class="artifact-tag-red">Dano de Habilidade</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Causa dano à Legião alvo e, em seguida, arremessa 2 Legiões inimigas próximas ao alvo. O Ataque Aéreo causa dano difuso a elas. Tipo de Dano: Mágico. Fator de Dano (Alvo): <span style="color: #fbbf24; font-weight: bold;">3000</span>. Fator de Dano (Outras Legiões): <span style="color: #fbbf24; font-weight: bold;">1000</span>.</p>
+                            <p><strong style="color: #f8fafc;">Efeito Adicional:</strong> Sempre que sua Legião recebe um efeito de fortalecimento por meio de uma Habilidade de Herói, ela causa 7% a mais de Dano de Habilidade de Artefato, até um máximo de 21% . Duração: 20 segundos.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade (Alvo):</strong> 3000 / 3500 / 4000 / 5000 / 6000</p>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade (Outras Legiões):</strong> 1000 / 1250 / 1500 / 1750 / 2000</p>
+                            <p><strong style="color: #f8fafc;">Bônus de dano da habilidade do Artefato:</strong> 7% / 9% / 11% / 13% / 15%</p>
+                        `
+                    },
+                                        {
+                        name: "Chama Infernal",
+                        image: "images/infernal_flame_full.png",
+                        role: `<span class="artifact-tag-red">Dano de ATQ Mágico</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Ao ser conjurada, sua Legião causa dano adicional sempre que realiza um ataque normal.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">1100</span></p>
+                            <p><strong style="color: #f8fafc;">Duração do Efeito:</strong> 3 s Passiva: Sua Legião ganha Aguçado Mágico quando o portador inflige Queimadura nos inimigos. Aguçado Mágico: ATQ + 15% por 5 s. Este efeito pode ser ativado uma vez a cada 10 s.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano Adicional da Habilidade Mágica:</strong> 1100 / 1350 / 1600 / 1900 / 2200</p>
+                            <p><strong style="color: #f8fafc;">Bônus de ATQ Mágico:</strong> 15% / 18% / 21% / 25% / 30%</p>
+                        `
                     }
                 ]
             },
-            alwyn: {
-                name: "Alwyn",
-                image: "images/Alwyn.png",
-                rarity: "Épico",
-                rarityClass: "rarity-epic",
-                talentImg: "images/talent-alwyn.png",
+            Thundelyn: {
+                name: "Thundelyn",
+                image: "images/Thundelyn.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/ThundelynTalento.png",
                 talentDesc: "Árvore focada em maximizar o tempo de recarga de habilidade para comandantes F2P.",
                 talentTags: ["Ramo: Controle", "Ramo: Regeneração"],
                 pairs: [
-                    { name: "Velyn", image: "images/Velyn.png", role: "Parceiro F2P Poderoso" }
+                   { name: "Thaleia", image: "images/Thaleia.png", role:`<span class="artifact-tag-red"> Melhor dupla</span>`}
                 ],
-                petName: "Fada Sombria",
-                petImage: "images/icone.png",
+                petName: "Faedrake Seráfico",
+                petImage: "images/FaedrakeSeráfico.png",
                 artifacts: [
-                    {
-                        name: "Orbe Ancestral",
-                        image: "images/artifact-orbe.png",
-                        role: `<span class="artifact-tag-red">Recuperação de Raiva</span>`,
-                        description: "<p>Foco total em acelerar ciclos de habilidade com regeneração passiva.</p>"
+{
+                        name: "Elegia do Trovão",
+                        image: "images/thunder_elegy.png",
+                        role: `<span class="artifact-tag-red">Dano Mágico Difuso e Controle</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Causa dano mágico difuso (Fator de Dano <span style="color: #fbbf24; font-weight: bold;">350</span>) a cada segundo em até <span style="color: #fbbf24;">5</span> Legiões inimigas em um círculo designado e inflige Silêncio: não pode usar Habilidades de Fúria por <span style="color: #fbbf24;">5</span> segundos. As Legiões afetadas por esta Habilidade não podem sair do círculo. O Silêncio pode ser ativado uma vez a cada <span style="color: #fbbf24;">10</span> segundos.</p>
+                            <p><strong style="color: #f8fafc;">Efeito adicional:</strong> Sempre que infligirem entorpecimento em uma Legião inimiga, a Legião do portador ganha Resistência: dano recebido - <span style="color: #fbbf24;">5%</span> por <span style="color: #fbbf24;">3 s</span>.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 350 / 450 / 550 / 650 / 750</p>
+                            <p><strong style="color: #f8fafc;">Redução de dano recebido:</strong> 5% / 6% / 7% / 8% / 10%</p>
+                        `
+                    },                    {
+                        name: "Olho de Fênix",
+                        image: "images/phoenix_eye.png",
+                        role: `<span class="artifact-tag-red">Dano de Hábilidade</span>`,
+                        description: `
+                            <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+                            <strong style="color: #f87171;">Custo de Fúria:</strong> 1600<br><br>
+                            <p>Causa dano a até <strong style="color: #fbbf24;">4</strong> Legiões inimigas em um círculo designado.</p>
+                            <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Dano de Habilidade de Artefato (Mágico) Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">2000</span></p>
+                            <p><strong style="color: #f8fafc;">Redução de Dano:</strong> Legiões recebem <span style="color: #fbbf24;">15%</span> menos dano por alvo adicional.</p>
+                            <hr>
+                            <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+                            <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 2000 / 2500 / 3000 / 3500 / 4000</p>
+                            <p><strong style="color: #f8fafc;">Alvos máximos:</strong> 4 / 4 / 4 / 4 / 5</p>
+                        `
                     }
                 ]
             }
