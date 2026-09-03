@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Estratégico - COD</title>
-               <link rel="icon" type="image/png" href="images/logo.png"/>
+    <link rel="icon" type="image/png" href="images/logo.png"/>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calculators.css">
 </head>
@@ -42,7 +42,7 @@
                 <li><a href="retorno-glorioso.html" class="menu-item menu-sub-item" data-i18n="glorious">⛨ Retorno Glorioso</a></li>
                 <li><a href="poder-por-hora.html" class="menu-item menu-sub-item" data-i18n="power">⚡ Poder por Hora</a></li>
                 <li><a href="tropas.html" class="menu-item menu-sub-item" data-i18n="troops">🏹 Tropas</a></li>
-                <li><a href="herois.html" class="menu-item menu-sub-item" data-i18n="heroes">⭐ Heróis</a></li>
+                <li><a href="herois.html" class="menu-item menu-sub-item" data-i18n="heroes">⭐ Fichas de Heróis</a></li>
                 <li><a href="tratados-flechas.html" class="menu-item menu-sub-item active" data-i18n="tf">📜 Tratados e Flechas</a></li>
             </ul>
         </li>
@@ -84,9 +84,9 @@
                         <!-- Tratados -->
                         <div class="tf-input-row">
                             <div class="tf-input-info">
-                                <span class="tf-input-name" data-i18n="tf_treaties_name">📜 Tratados (Centro de
-                                    Rally)</span>
-                                <span class="tf-input-desc" data-i18n="tf_treaties_desc">Evolução de 1 até 25</span>
+                                <span class="tf-input-name" data-i18n="tf_treaties_name">📜 TRATADOS</span>
+                                <span class="tf-input-desc" data-i18n="tf_treaties_desc">Centro de
+                                    Rally.</span>
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <div style="display: flex; flex-direction: column; gap: 3px;">
@@ -111,9 +111,9 @@
                         <!-- Flechas -->
                         <div class="tf-input-row">
                             <div class="tf-input-info">
-                                <span class="tf-input-name" data-i18n="tf_arrows_name">🏹 Flechas (Torre de
-                                    Vigia)</span>
-                                <span class="tf-input-desc" data-i18n="tf_arrows_desc">Evolução de 1 até 25</span>
+                                <span class="tf-input-name" data-i18n="tf_arrows_name">🏹 FLECHAS</span>
+                                <span class="tf-input-desc" data-i18n="tf_arrows_desc">Torre de
+                                    Vigia</span>
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <div style="display: flex; flex-direction: column; gap: 3px;">
@@ -139,39 +139,58 @@
                             RESETAR SELETORES</button>
                     </div>
 
-                    <!-- Coluna Direita: Painel Tecnológico com Círculos de Porcentagem -->
+                    <!-- Coluna Direita: Painel Tecnológico com Dois Círculos de Porcentagem Separados -->
                     <div class="tf-circle-card">
-                        <div
-                            style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <span
-                                style="font-size: 0.8rem; color: #a78bfa; font-weight: 700; text-transform: uppercase;"
-                                data-i18n="tf_tech_status"></span>
-                            <span
-                                style="font-size: 0.75rem; color: #34d399; background: rgba(52,211,153,0.1); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(52,211,153,0.2);"
-                                data-i18n="tf_rate_10gems">1 Item = 10 Gemas</span>
+                        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 0.8rem; color: #a78bfa; font-weight: 700; text-transform: uppercase;" data-i18n="tf_tech_status">Progresso Individual</span>
+                            <span style="font-size: 0.75rem; color: #34d399; background: rgba(52,211,153,0.1); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(52,211,153,0.2);" data-i18n="tf_rate_10gems">1 Item = 10 Gemas</span>
                         </div>
 
-                        <!-- SVG Gradient Def -->
+                        <!-- SVG Gradients Defs -->
                         <svg width="0" height="0">
                             <defs>
-                                <linearGradient id="tf-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="tf-gradient-treaties" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#38bdf8" />
+                                    <stop offset="100%" stop-color="#0284c7" />
+                                </linearGradient>
+                                <linearGradient id="tf-gradient-arrows" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#c084fc" />
                                     <stop offset="100%" stop-color="#7c3aed" />
                                 </linearGradient>
                             </defs>
                         </svg>
 
-                        <!-- Círculo de Progresso -->
-                        <div class="tf-progress-ring-container">
-                            <svg class="tf-progress-ring" viewBox="0 0 160 160">
-                                <circle class="tf-progress-ring__circle-bg" cx="80" cy="80" r="70"></circle>
-                                <circle class="tf-progress-ring__circle" id="tf-ring-progress" cx="80" cy="80" r="70">
-                                </circle>
-                            </svg>
-                            <div class="tf-ring-inner-content">
-                                <span class="tf-ring-percentage" id="tf-total-percent">0%</span>
-                                <span class="tf-ring-label" data-i18n="tf_ring_complete">Concluído</span>
+                        <!-- Container dos dois círculos lado a lado -->
+                        <div class="tf-dual-rings-container" style="display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px;">
+                            
+                            <!-- Círculo Tratados -->
+                            <div class="tf-single-ring-wrapper" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                <div class="tf-progress-ring-container" style="position: relative; width: 110px; height: 110px;">
+                                    <svg class="tf-progress-ring" viewBox="0 0 160 160" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                                        <circle cx="80" cy="80" r="70" stroke="#1e293b" stroke-width="14" fill="none"></circle>
+                                        <circle id="tf-ring-treaty" cx="80" cy="80" r="70" stroke="url(#tf-gradient-treaties)" stroke-width="14" stroke-dasharray="439.8" stroke-dashoffset="439.8" stroke-linecap="round" fill="none" style="transition: stroke-dashoffset 0.4s ease-in-out;"></circle>
+                                    </svg>
+                                    <div class="tf-ring-inner-content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <span class="tf-ring-percentage" id="tf-treaty-percent" style="font-size: 1.2rem; font-weight: bold; color: #f8fafc;">0%</span>
+                                        <span class="tf-ring-label" style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;">Tratados</span>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Círculo Flechas -->
+                            <div class="tf-single-ring-wrapper" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                <div class="tf-progress-ring-container" style="position: relative; width: 110px; height: 110px;">
+                                    <svg class="tf-progress-ring" viewBox="0 0 160 160" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                                        <circle cx="80" cy="80" r="70" stroke="#1e293b" stroke-width="14" fill="none"></circle>
+                                        <circle id="tf-ring-arrow" cx="80" cy="80" r="70" stroke="url(#tf-gradient-arrows)" stroke-width="14" stroke-dasharray="439.8" stroke-dashoffset="439.8" stroke-linecap="round" fill="none" style="transition: stroke-dashoffset 0.4s ease-in-out;"></circle>
+                                    </svg>
+                                    <div class="tf-ring-inner-content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <span class="tf-ring-percentage" id="tf-arrow-percent" style="font-size: 1.2rem; font-weight: bold; color: #f8fafc;">0%</span>
+                                        <span class="tf-ring-label" style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;">Flechas</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <!-- Resultados Separados Tratados e Flechas -->
