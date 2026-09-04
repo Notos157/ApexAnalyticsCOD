@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banco de Dados - Heróis - ApexAnalytics</title>
-    <link rel="icon" type="image/png" href="images/logo.png"/>
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calculators.css">
     <style>
@@ -577,6 +577,7 @@
         }
 
         @media(max-width: 600px) {
+
             .hero-pair-card,
             .hero-artifact-card,
             .hero-pet-card {
@@ -604,7 +605,8 @@
                     <span class="submenu-indicator">-</span>
                 </a>
                 <ul class="submenu-container open" id="database-submenu">
-                    <li><a href="db-herois.html" class="menu-item menu-sub-item active" data-i18n="db_heroes">⭐ Heróis</a></li>
+                    <li><a href="db-herois.html" class="menu-item menu-sub-item active" data-i18n="db_heroes">⭐
+                            Heróis</a></li>
                 </ul>
             </li>
 
@@ -647,10 +649,12 @@
         </header>
 
         <section class="tab-content active">
-            <div class="panel-card" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px;">
+            <div class="panel-card"
+                style="background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 25px;">
                 <div class="db-hero-header">
                     <h3 style="color: #f8fafc; margin-bottom: 5px;">📦 BANCO DE DADOS DE HERÓIS</h3>
-                    <p class="subtitle-card">Consulte a lista completa de heróis, raridades, especialidades e talentos. Clique em um herói para ver os detalhes.</p>
+                    <p class="subtitle-card">Consulte a lista completa de heróis, raridades, especialidades e talentos.
+                        Clique em um herói para ver os detalhes.</p>
                 </div>
 
                 <!-- Filtros Responsivos + Barra de Pesquisa por Nome -->
@@ -666,14 +670,66 @@
                     </div>
                     <div class="db-search-wrapper">
                         <span class="db-search-icon">🔍</span>
-                        <input type="text" id="heroSearchInput" class="db-search-input" placeholder="Pesquisar comandante..." oninput="filterHeroes()">
+                        <input type="text" id="heroSearchInput" class="db-search-input"
+                            placeholder="Pesquisar comandante..." oninput="filterHeroes()">
                     </div>
                 </div>
 
                 <!-- Grid de Cards de Heróis -->
                 <div class="db-hero-grid" id="db-hero-grid">
+
+                    <!-- Urag -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="cavalry" data-name="Urag"
+                        onclick="openHeroModal('Urag')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Urag.png" alt="Urag" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Urag</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Cavalaria</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Habilidade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forondil -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="cavalry" data-name="Forondil"
+                        onclick="openHeroModal('Forondil')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Forondil.png" alt="Forondil" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Forondil</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Cavalaria</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Controle</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Emrys -->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="cavalry" data-name="Emrys"
+                        onclick="openHeroModal('Emrys')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Emrys.png" alt="Emrys" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Emrys</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Cavalaria</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Mobilidade</span>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Liliya -->
-                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="liliya" onclick="openHeroModal('liliya')">
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="liliya"
+                        onclick="openHeroModal('liliya')">
                         <div class="hero-card-img-wrapper">
                             <img src="images/Liliya.png" alt="Liliya" onerror="this.src='images/icone.png';">
                             <span class="hero-rarity-badge rarity-legendary">Lendário</span>
@@ -689,7 +745,8 @@
                     </div>
 
                     <!-- Velyn -->
-                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="velyn" onclick="openHeroModal('velyn')">
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="velyn"
+                        onclick="openHeroModal('velyn')">
                         <div class="hero-card-img-wrapper">
                             <img src="images/Velyn.png" alt="Velyn" onerror="this.src='images/icone.png';">
                             <span class="hero-rarity-badge rarity-legendary">Lendário</span>
@@ -705,7 +762,8 @@
                     </div>
 
                     <!-- Bertrand -->
-                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="bertrand" onclick="openHeroModal('bertrand')">
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="bertrand"
+                        onclick="openHeroModal('bertrand')">
                         <div class="hero-card-img-wrapper">
                             <img src="images/Bertrand.png" alt="Bertrand" onerror="this.src='images/icone.png';">
                             <span class="hero-rarity-badge rarity-legendary">Lendário</span>
@@ -721,7 +779,8 @@
                     </div>
 
                     <!-- Thundelyn -->
-                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="Thundelyn" onclick="openHeroModal('Thundelyn')">
+                    <div class="hero-card-db" data-rarity="legendary" data-type="magic" data-name="Thundelyn"
+                        onclick="openHeroModal('Thundelyn')">
                         <div class="hero-card-img-wrapper">
                             <img src="images/Thundelyn.png" alt="Thundelyn" onerror="this.src='images/icone.png';">
                             <span class="hero-rarity-badge rarity-legendary">Lendário</span>
@@ -772,6 +831,109 @@
     <script>
         // BANCO DE DADOS DE CONFIGURAÇÃO DOS HERÓIS
         const heroesData = {
+            Urag: {
+                name: "Urag",
+                image: "images/Urag.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/UragTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Dano de Hablidade"],
+                pairs: [
+                    { name: "Tobin", image: "images/Tobin.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` }
+                ],
+                // Configuração do Mascote e sua Árvore de Habilidades
+                petName: "Rocha Dourada",
+                petImage: "images/ManticoradeLâmina.png",
+                petTalentImg: "images/UragPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
+                artifacts: [
+                    {
+                        name: "Chifre de Uivo de Lobo",
+                        image: "images/wolf-howl_horn.png",
+                        role: `<span class="artifact-tag-red">Dano de Hábilidade</span>`,
+                        description: `
+        <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+        <strong style="color: #f87171;">Custo de Fúria:</strong> 600<br><br>
+        <p>Invoca uma carga de cavalaria em uma direção designada, causando dano a até <strong style="color: #f8fafc;">3</strong> Legiões inimigas e infligindo Tremor por <strong style="color: #f8fafc;">2</strong> segundos. Tipo de Dano: Físico. Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">2200</span>.</p>
+        <p><strong style="color: #f8fafc;">Efeito Adicional:</strong> Quando um Comandante Herói de Cavalaria usa uma Habilidade de Fúria, a Legião alvo atingida sofre Sangramento: causa dano a cada segundo por <strong style="color: #f8fafc;">3</strong> segundos. Tipo de Dano: Físico. Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">300</span>.</p>
+        <p>O efeito pode ser ativado uma vez a cada <strong style="color: #f8fafc;">90</strong> segundos.</p>
+        <hr>
+        <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+        <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 2200 / 2750 / 3300 / 3850 / 4400</p>
+        <p><strong style="color: #f8fafc;">Duração do Tremor:</strong> 2 / 2 / 2 / 3 / 3</p>
+        <p><strong style="color: #f8fafc;">Fator de Dano Contínuo:</strong> 300 / 375 / 450 / 525 / 600</p>
+    `
+                    }
+                ]
+            },
+            Forondil: {
+                name: "Forondil",
+                image: "images/Forondil.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/ForondilTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Controle"],
+                pairs: [
+                    { name: "Theodore", image: "images/Theodore.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` }
+                ],
+                // Configuração do Mascote e sua Árvore de Habilidades
+                petName: "Rocha Dourada",
+                petImage: "images/FaedrakeBerserk.png",
+                petTalentImg: "images/ForondilPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
+                artifacts: [
+                    {
+                        name: "Juramento de Stormpeak",
+                        image: "images/JuramentodeStormpeak.png",
+                        role: `<span class="artifact-tag-red">Especial / Invocação</span>`,
+                        description: `
+        <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+        <strong style="color: #f87171;">Custo de Fúria:</strong> 600<br><br>
+        <p>Invoca um clone da sua Legião. A Legião clonada causa <span style="color: #fbbf24; font-weight: bold;">50%</span> do dano que sua Legião original causa e recebe <span style="color: #fbbf24; font-weight: bold;">50%</span> mais dano do que sua Legião original receberia. Se sua Legião for de Cavalaria, a Legião clonada ganha <span style="color: #fbbf24; font-weight: bold;">1000</span> de Fúria ao entrar em batalha. Legiões clonadas desaparecem <span style="color: #f8fafc;">10</span> segundos após serem invocadas.</p>
+        <p><strong style="color: #f8fafc;">Efeito adicional:</strong> Quando sua Legião inflige Covardia em uma Legião inimiga, sua Legião ganha Fúria: dano causado + <span style="color: #fbbf24; font-weight: bold;">4%</span> por <span style="color: #f8fafc;">10</span> s.</p>
+        <hr>
+        <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+        <p><strong style="color: #f8fafc;">Dano causado:</strong> 50% / 60% / 70% / 85% / 100%</p>
+        <p><strong style="color: #f8fafc;">Bônus de dano causado:</strong> 4% / 5% / 6% / 8% / 10%</p>
+    `
+                    }
+                ]
+            },
+            Emrys: {
+                name: "Emrys",
+                image: "images/Emrys.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/EmrysTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Dano de Habilidade"],
+                pairs: [
+                    { name: "Bakshi", image: "images/Bakshi.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` }
+                ],
+                // Configuração do Mascote e sua Árvore de Habilidades
+                petName: "Rocha Dourada",
+                petImage: "images/RochaDourada.png",
+                petTalentImg: "images/EmrysPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
+                artifacts: [
+                    {
+                        name: "Lâminas de mola",
+                        image: "images/springblades.png",
+                        role: `<span class="artifact-tag-blue">Dano de Habilidade</span>`,
+                        description: `
+        <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+        <strong style="color: #f87171;">Custo de Fúria:</strong> 600<br><br>
+        <p>Lança uma lâmina que causa dano difuso a até <strong style="color: #f8fafc;">3</strong> Legiões em um círculo designado a cada segundo por <strong style="color: #f8fafc;">5</strong> segundos antes de retornar à posição da sua Legião. Ao retornar, a lâmina causa dano difuso a até <strong style="color: #f8fafc;">3</strong> Legiões em seu caminho.</p>
+        <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Físico. Fator de Dano (Lançamento): <span style="color: #fbbf24; font-weight: bold;">200</span>. Fator de Dano (Retorno): <span style="color: #fbbf24; font-weight: bold;">1000</span>.</p>
+        <p><strong style="color: #f8fafc;">Efeito adicional:</strong> Quando sua Legião ganha Paixão, ela também ganha Aguçado: ATQ + 15% por 5 s.</p>
+        <hr>
+        <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+        <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade (Lançamento):</strong> 200 / 250 / 300 / 350 / 400</p>
+        <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade (Retorno):</strong> 1000 / 1200 / 1400 / 1700 / 2000</p>
+        <p><strong style="color: #f8fafc;">Bônus de ATQ:</strong> 15% / 18% / 21% / 25% / 30%</p>
+    `
+                    }
+                ]
+            },
             liliya: {
                 name: "Liliya",
                 image: "images/Liliya.png",
@@ -781,11 +943,11 @@
                 talentDesc: "",
                 talentTags: ["Ramo: Dano de Habilidade"],
                 pairs: [
-                    { name: "Velyn", image: "images/Velyn.png", role:`<span class="artifact-tag-red">Melhor Dupla</span>` },
-                    { name: "Theia", image: "images/Theia.png", role: `<span class="artifact-tag-red"> Boa Dupla</span>`}
+                    { name: "Velyn", image: "images/Velyn.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` },
+                    { name: "Theia", image: "images/Theia.png", role: `<span class="artifact-tag-red"> Boa Dupla</span>` }
                 ],
                 // Configuração do Mascote e sua Árvore de Habilidades
-                petName: "Sapphire Faedrake", 
+                petName: "Sapphire Faedrake",
                 petImage: "images/SapphireFaedrake.png",
                 petTalentImg: "images/LiliyaPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
                 artifacts: [
@@ -832,7 +994,7 @@
                 talentDesc: "",
                 talentTags: ["Ramo: Dano de ATQ Mágico"],
                 pairs: [
-                    { name: "Waldyr", image: "images/Waldyr.png", role:`<span class="artifact-tag-red"> Melhor dupla F2P</span>`},
+                    { name: "Waldyr", image: "images/Waldyr.png", role: `<span class="artifact-tag-red"> Melhor dupla F2P</span>` },
                 ],
                 petName: "Sapphire Faedrake",
                 petImage: "images/SapphireFaedrake.png",
@@ -878,10 +1040,10 @@
                 rarityClass: "rarity-legendary",
                 talentImg: "images/BertrandTalentos.png",
                 talentDesc: "Build otimizada para sobrevivência em linha de frente e aplicação rápida de habilidades.",
-                talentTags: ["Ramo: Habilidade"],
+                talentTags: ["Ramo: Dano de Habilidade"],
                 pairs: [
-                    { name: "Tohar", image: "images/Tohar.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>`},
-                    { name: "Theia", image: "images/Theia.png", role: `<span class="artifact-tag-red">Voador</span>`}
+                    { name: "Tohar", image: "images/Tohar.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` },
+                    { name: "Theia", image: "images/Theia.png", role: `<span class="artifact-tag-red">Voador</span>` }
                 ],
                 petName: "Sombra Faedrake",
                 petImage: "images/SombraFaedrake.png",
@@ -928,9 +1090,9 @@
                 rarityClass: "rarity-legendary",
                 talentImg: "images/ThundelynTalento.png",
                 talentDesc: "Árvore focada em maximizar o tempo de recarga de habilidade para comandantes F2P.",
-                talentTags: ["Ramo: Controle", "Ramo: Regeneração"],
+                talentTags: ["Ramo: Controle"],
                 pairs: [
-                   { name: "Thaleia", image: "images/Thaleia.png", role:`<span class="artifact-tag-red"> Melhor dupla</span>`}
+                    { name: "Thaleia", image: "images/Thaleia.png", role: `<span class="artifact-tag-red"> Melhor dupla</span>` }
                 ],
                 petName: "Faedrake Seráfico",
                 petImage: "images/FaedrakeSeráfico.png",
@@ -950,7 +1112,7 @@
                             <p><strong style="color: #f8fafc;">Fator de Dano da Habilidade:</strong> 350 / 450 / 550 / 650 / 750</p>
                             <p><strong style="color: #f8fafc;">Redução de dano recebido:</strong> 5% / 6% / 7% / 8% / 10%</p>
                         `
-                    },                    
+                    },
                     {
                         name: "Olho de Fênix",
                         image: "images/phoenix_eye.png",
@@ -1363,11 +1525,15 @@
         });
     </script>
 
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <a href="https://ko-fi.com/toxicteddy" target="_blank" class="floating-donation-btn" style="background: transparent; border: none; padding: 0; box-shadow: none;">
-    <img src="images/logo.png" alt="Apoie" style="width: 55px; height: 55px; object-fit: contain; border-radius: 50%; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-</a>
+    <a href="https://ko-fi.com/toxicteddy" target="_blank" class="floating-donation-btn"
+        style="background: transparent; border: none; padding: 0; box-shadow: none;">
+        <img src="images/logo.png" alt="Apoie"
+            style="width: 55px; height: 55px; object-fit: contain; border-radius: 50%; transition: transform 0.2s;"
+            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </a>
 </body>
 
 </html>
