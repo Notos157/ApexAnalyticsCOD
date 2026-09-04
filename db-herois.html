@@ -678,6 +678,23 @@
                 <!-- Grid de Cards de Heróis -->
                 <div class="db-hero-grid" id="db-hero-grid">
 
+                    <!-- Nëya-->
+                    <div class="hero-card-db" data-rarity="legendary" data-type="cavalry" data-name="Nëya"
+                        onclick="openHeroModal('Nëya')">
+                        <div class="hero-card-img-wrapper">
+                            <img src="images/Nëya.png" alt="Nëya" onerror="this.src='images/icone.png';">
+                            <span class="hero-rarity-badge rarity-legendary">Lendário</span>
+                        </div>
+                        <div class="hero-card-info">
+                            <div class="hero-card-title">Nëya</div>
+                            <div class="hero-card-tags">
+                                <span class="hero-tag">Cavalaria</span>
+                                <span class="hero-tag">PvP</span>
+                                <span class="hero-tag">Mobilidade</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Urag -->
                     <div class="hero-card-db" data-rarity="legendary" data-type="cavalry" data-name="Urag"
                         onclick="openHeroModal('Urag')">
@@ -831,6 +848,43 @@
     <script>
         // BANCO DE DADOS DE CONFIGURAÇÃO DOS HERÓIS
         const heroesData = {
+            Nëya: {
+                name: "Nëya",
+                image: "images/Nëya.png",
+                rarity: "Lendário",
+                rarityClass: "rarity-legendary",
+                talentImg: "images/NëyaTalentos.png",
+                talentDesc: "",
+                talentTags: ["Ramo: Mobilidade"],
+                pairs: [
+                    { name: "Lieh-Shan Yen", image: "images/Lieh-Shan Yen.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` }
+                ],
+                // Configuração do Mascote e sua Árvore de Habilidades
+                petName: "Cão de Guerra Áurico",
+                petImage: "images/CãodeGuerraÁurico.png",
+                petTalentImg: "images/NëyaPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
+                artifacts: [
+{
+    name: "lunaris",
+    image: "images/lunaris.png",
+    role: `<span class="artifact-tag-red">Dano de ATQ Físico</span>`,
+    description: `
+        <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
+        <strong style="color: #f87171;">Custo de Fúria:</strong> 600<br><br>
+        <p>Causa dano difuso a até <strong style="color: #f8fafc;">3</strong> Legiões inimigas em um cone designado. Concede à Legião Fúria e Resistência por <strong style="color: #f8fafc;">10</strong> segundos. Fúria: Dano causado + <span style="color: #fbbf24; font-weight: bold;">7%</span>. Resistência: Dano recebido - <span style="color: #fbbf24; font-weight: bold;">5%</span>.</p>
+        <p><strong style="color: #f8fafc;">Tipo de Dano:</strong> Físico Fator de Dano: <span style="color: #fbbf24; font-weight: bold;">2200</span></p>
+        <p><strong style="color: #f8fafc;">Efeito adicional:</strong> Legion ganha Aceleração enquanto estiver Camuflado e ganha Sinergia quando o efeito de Camuflagem é removido. Aceleração: Velocidade de Marcha + <span style="color: #fbbf24; font-weight: bold;">20%</span>. Sinergia: Dano de Habilidade de Herói + <span style="color: #fbbf24; font-weight: bold;">10%</span> por <span style="color: #f8fafc;">15</span> segundos.</p>
+        <hr>
+        <div style="text-align: center; color: #fbbf24; font-weight: bold; margin-bottom: 8px;">Atualizar ⇧</div>
+        <p><strong style="color: #f8fafc;">Fator de Dano de Habilidade:</strong> 2200 / 2750 / 3300 / 3850 / 4400</p>
+        <p><strong style="color: #f8fafc;">Bônus de dano padrão:</strong> 7% / 9% / 11% / 13% / 15%</p>
+        <p><strong style="color: #f8fafc;">Redução de dano recebido:</strong> 5% / 6% / 7% / 8% / 10%</p>
+        <p><strong style="color: #f8fafc;">Bônus de velocidade de marcha:</strong> 20% / 25% / 30% / 35% / 40%</p>
+        <p><strong style="color: #f8fafc;">Bônus de dano de habilidade de herói:</strong> 10% / 12% / 14% / 17% / 20%</p>
+    `
+}
+                ]
+            },
             Urag: {
                 name: "Urag",
                 image: "images/Urag.png",
@@ -843,7 +897,7 @@
                     { name: "Tobin", image: "images/Tobin.png", role: `<span class="artifact-tag-red">Melhor Dupla</span>` }
                 ],
                 // Configuração do Mascote e sua Árvore de Habilidades
-                petName: "Rocha Dourada",
+                petName: "Manticora de Lâmina",
                 petImage: "images/ManticoradeLâmina.png",
                 petTalentImg: "images/UragPet.png", // Substitua pelo caminho real da imagem da árvore de habilidades do pet
                 artifacts: [
@@ -884,7 +938,7 @@
                 artifacts: [
                     {
                         name: "Juramento de Stormpeak",
-                        image: "images/JuramentodeStormpeak.png",
+                        image: "images/JuramentoDeStormpeak.png",
                         role: `<span class="artifact-tag-red">Especial / Invocação</span>`,
                         description: `
         <strong style="color: #38bdf8;">Tempo de recarga:</strong> 1m30<br>
